@@ -1,5 +1,15 @@
-.MuiButtonBase-root {
+.botonInicialAcorde {
   background-color: #F5EEB7 !important;
   color: black !important;
   border-color:  #F5EEB7 !important;
+}
+
+.botonEnviarFormPreInscripcion {
+  background-color: #F5EEB7 !important;
+  color: black !important;
+  border-color:  #F5EEB7 !important;
+}
+
+.colorDeFondo{
+  background-color: #9AB1BC !important;
 }
