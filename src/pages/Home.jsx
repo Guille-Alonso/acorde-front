@@ -9,14 +9,14 @@ const Home = () => {
     flexDirection: 'column', // Cambia la dirección a columna
     justifyContent: 'center',
     alignItems: 'center',
-    height: '90vh',
+    height: '85vh',
     gap: '16px', // Espaciado entre elementos
   };
 
   const imageStyle = {
     maxWidth: '100%',
     maxHeight: '100%', // Ajusta la altura máxima si es necesario
-    borderRadius: '8px', // Borde opcional para estilizar
+  
   };
 
   const navigate = useNavigate()

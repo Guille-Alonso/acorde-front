@@ -89,19 +89,18 @@ console.log(-4 > 0);
   }));
 
   return (
-  
     <Box
-    sx={{
-      maxWidth: 800,
-      margin: 'auto', // Esto centrará horizontalmente
-      padding: '20px',
-      boxShadow: 3,
-      borderRadius: 2,
-      backgroundColor: '#f9f9f9',
-      display: 'flex',
-      flexDirection: 'column', // Para mantener el contenido vertical
-      alignItems: 'center', // Centrar contenido horizontalmente
-    }}
+      sx={{
+        maxWidth: 800,
+        margin: "auto", // Esto centrará horizontalmente
+        padding: "20px",
+        boxShadow: 3,
+        borderRadius: 2,
+        backgroundColor: "#f9f9f9",
+        display: "flex",
+        flexDirection: "column", // Para mantener el contenido vertical
+        alignItems: "center", // Centrar contenido horizontalmente
+      }}
     >
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -117,25 +116,25 @@ console.log(-4 > 0);
                 }
               }}
               inputProps={{ maxLength: 30 }}
-                onFocus={() => handleFocus('nombre')}
+              onFocus={() => handleFocus("nombre")}
               margin="normal"
               error={!!errors.nombre}
               helperText={errors.nombre}
               fullWidth
-
               sx={{
-                '& .MuiInputLabel-root': {
-                  '&.Mui-focused, &.MuiInputLabel-shrink': {
-                    color: '#DFA57C',
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused, &.MuiInputLabel-shrink": {
+                    color: "#DFA57C",
                   },
                 },
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)': {
-                    '& fieldset': {
-                      borderColor: '#DFA57C',
-                    }
-                  }
-                }
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                    {
+                      "& fieldset": {
+                        borderColor: "#DFA57C",
+                      },
+                    },
+                },
               }}
             />
           </Grid>
@@ -152,35 +151,34 @@ console.log(-4 > 0);
                 }
               }}
               inputProps={{ maxLength: 30 }}
-                onFocus={() => handleFocus('apellido')}
+              onFocus={() => handleFocus("apellido")}
               margin="normal"
               error={!!errors.apellido}
               helperText={errors.apellido}
               fullWidth
-         
               sx={{
-                '& .MuiInputLabel-root': {
-                  '&.Mui-focused, &.MuiInputLabel-shrink': {
-                    color: '#DFA57C',
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused, &.MuiInputLabel-shrink": {
+                    color: "#DFA57C",
                   },
                 },
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)': {
-                    '& fieldset': {
-                      borderColor: '#DFA57C',
-                    }
-                  }
-                }
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                    {
+                      "& fieldset": {
+                        borderColor: "#DFA57C",
+                      },
+                    },
+                },
               }}
             />
           </Grid>
-          
+
           <Grid item xs={12} md={6}>
             <TextField
               label="Edad"
               name="edad"
               type="text"
-            
               value={formValues.edad}
               onChange={(e) => {
                 // Verificar si el input contiene solo números
@@ -189,26 +187,26 @@ console.log(-4 > 0);
                 }
               }}
               inputProps={{ maxLength: 3 }}
-                 onFocus={() => handleFocus('edad')}
+              onFocus={() => handleFocus("edad")}
               margin="normal"
               error={!!errors.edad}
               helperText={errors.edad}
               fullWidth
               sx={{
-                '& .MuiInputLabel-root': {
-                  '&.Mui-focused, &.MuiInputLabel-shrink': {
-                    color: '#DFA57C',
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused, &.MuiInputLabel-shrink": {
+                    color: "#DFA57C",
                   },
                 },
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)': {
-                    '& fieldset': {
-                      borderColor: '#DFA57C',
-                    }
-                  }
-                }
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                    {
+                      "& fieldset": {
+                        borderColor: "#DFA57C",
+                      },
+                    },
+                },
               }}
-              
             />
           </Grid>
 
@@ -216,7 +214,7 @@ console.log(-4 > 0);
             <TextField
               label="Número de celular"
               name="numCel"
-                type="text"
+              type="text"
               value={formValues.numCel}
               onChange={(e) => {
                 // Verificar si el input contiene solo números
@@ -225,26 +223,26 @@ console.log(-4 > 0);
                 }
               }}
               inputProps={{ maxLength: 12 }}
-                 onFocus={() => handleFocus('numCel')}
+              onFocus={() => handleFocus("numCel")}
               margin="normal"
               error={!!errors.numCel}
               helperText={errors.numCel}
               fullWidth
               sx={{
-                '& .MuiInputLabel-root': {
-                  '&.Mui-focused, &.MuiInputLabel-shrink': {
-                    color: '#DFA57C',
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused, &.MuiInputLabel-shrink": {
+                    color: "#DFA57C",
                   },
                 },
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)': {
-                    '& fieldset': {
-                      borderColor: '#DFA57C',
-                    }
-                  }
-                }
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                    {
+                      "& fieldset": {
+                        borderColor: "#DFA57C",
+                      },
+                    },
+                },
               }}
-      
             />
           </Grid>
 
@@ -255,26 +253,26 @@ console.log(-4 > 0);
               value={formValues.nombreMadre}
               onChange={handleChange}
               inputProps={{ maxLength: 40 }}
-                 onFocus={() => handleFocus('nombreMadre')}
+              onFocus={() => handleFocus("nombreMadre")}
               margin="normal"
               fullWidth
               error={!!errors.nombreMadre}
               helperText={errors.nombreMadre}
               sx={{
-                '& .MuiInputLabel-root': {
-                  '&.Mui-focused, &.MuiInputLabel-shrink': {
-                    color: '#DFA57C',
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused, &.MuiInputLabel-shrink": {
+                    color: "#DFA57C",
                   },
                 },
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)': {
-                    '& fieldset': {
-                      borderColor: '#DFA57C',
-                    }
-                  }
-                }
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                    {
+                      "& fieldset": {
+                        borderColor: "#DFA57C",
+                      },
+                    },
+                },
               }}
-      
             />
           </Grid>
 
@@ -285,26 +283,26 @@ console.log(-4 > 0);
               value={formValues.nombrePadre}
               onChange={handleChange}
               inputProps={{ maxLength: 40 }}
-                 onFocus={() => handleFocus('nombrePadre')}
+              onFocus={() => handleFocus("nombrePadre")}
               margin="normal"
               fullWidth
               error={!!errors.nombrePadre}
               helperText={errors.nombrePadre}
               sx={{
-                '& .MuiInputLabel-root': {
-                  '&.Mui-focused, &.MuiInputLabel-shrink': {
-                    color: '#DFA57C',
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused, &.MuiInputLabel-shrink": {
+                    color: "#DFA57C",
                   },
                 },
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)': {
-                    '& fieldset': {
-                      borderColor: '#DFA57C',
-                    }
-                  }
-                }
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                    {
+                      "& fieldset": {
+                        borderColor: "#DFA57C",
+                      },
+                    },
+                },
               }}
-      
             />
           </Grid>
 
@@ -313,30 +311,46 @@ console.log(-4 > 0);
               component="fieldset"
               margin="normal"
               fullWidth
-              onFocus={() => handleFocus('nivel')}
+              onFocus={() => handleFocus("nivel")}
               error={!!errors.nivel}
               sx={{
-                '& .MuiFormLabel-root.Mui-focused': {
-                  color: focusedField === 'nivel' ? '#9AB1BC' : undefined,
+                "& .MuiFormLabel-root.Mui-focused": {
+                  color: focusedField === "nivel" ? "#9AB1BC" : undefined,
                 },
-                '& .MuiOutlinedInput-root.Mui-focused': {
-                  '& fieldset': {
-                    borderColor: '#9AB1BC', // Color que toma el campo en foco
-                  }
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& fieldset": {
+                    borderColor: "#9AB1BC", // Color que toma el campo en foco
+                  },
                 },
-                '& .MuiRadio-root.Mui-checked': {
-                  color: '#9AB1BC', // Cambia el color cuando está marcado
+                "& .MuiRadio-root.Mui-checked": {
+                  color: "#9AB1BC", // Cambia el color cuando está marcado
                 },
-                '& .MuiFormLabel-root:not(.Mui-focused)': {
-                  color: '#9AB1BC', // Color que se mantiene cuando pierde el foco
-                }
+                "& .MuiFormLabel-root:not(.Mui-focused)": {
+                  color: "#9AB1BC", // Color que se mantiene cuando pierde el foco
+                },
               }}
             >
               <FormLabel component="legend">Nivel de aprendizaje</FormLabel>
-              <RadioGroup name="nivel" value={formValues.nivel} onChange={handleChange}>
-                <FormControlLabel value="iniciacion" control={<Radio />} label="Iniciación" />
-                <FormControlLabel value="medio" control={<Radio />} label="Medio" />
-                <FormControlLabel value="avanzado" control={<Radio />} label="Avanzado" />
+              <RadioGroup
+                name="nivel"
+                value={formValues.nivel}
+                onChange={handleChange}
+              >
+                <FormControlLabel
+                  value="iniciacion"
+                  control={<Radio />}
+                  label="Iniciación"
+                />
+                <FormControlLabel
+                  value="medio"
+                  control={<Radio />}
+                  label="Medio"
+                />
+                <FormControlLabel
+                  value="avanzado"
+                  control={<Radio />}
+                  label="Avanzado"
+                />
               </RadioGroup>
               {/* Este componente mostrará el mensaje de error */}
               {errors.nivel && <FormHelperText>{errors.nivel}</FormHelperText>}
@@ -348,57 +362,104 @@ console.log(-4 > 0);
               component="fieldset"
               margin="normal"
               fullWidth
-              onFocus={() => handleFocus('clases')}
+              onFocus={() => handleFocus("clases")}
               error={!!errors.clases}
               sx={{
-                '& .MuiFormLabel-root.Mui-focused': {
-                  color: focusedField === 'clases' ? '#9AB1BC' : undefined,
+                "& .MuiFormLabel-root.Mui-focused": {
+                  color: focusedField === "clases" ? "#9AB1BC" : undefined,
                 },
-                '& .MuiOutlinedInput-root.Mui-focused': {
-                  '& fieldset': {
-                    borderColor: '#9AB1BC', // Color que toma el campo en foco
-                  }
+                "& .MuiOutlinedInput-root.Mui-focused": {
+                  "& fieldset": {
+                    borderColor: "#9AB1BC", // Color que toma el campo en foco
+                  },
                 },
-                '& .MuiRadio-root.Mui-checked': {
-                  color: '#9AB1BC', // Cambia el color cuando está marcado
+                "& .MuiRadio-root.Mui-checked": {
+                  color: "#9AB1BC", // Cambia el color cuando está marcado
                 },
-                '& .MuiFormLabel-root:not(.Mui-focused)': {
-                  color: '#9AB1BC', // Color que se mantiene cuando pierde el foco
-                }
+                "& .MuiFormLabel-root:not(.Mui-focused)": {
+                  color: "#9AB1BC", // Color que se mantiene cuando pierde el foco
+                },
               }}
             >
               <FormLabel component="legend">Clases</FormLabel>
-              <RadioGroup name="clases" value={formValues.clases} onChange={handleChange}>
+              {/* <RadioGroup name="clases" value={formValues.clases} onChange={handleChange}>
                 <FormControlLabel value="Piano" control={<Radio />} label="Piano" />
                 <FormControlLabel value="Guitarra" control={<Radio />} label="Guitarra" />
                 <FormControlLabel value="Percusión" control={<Radio />} label="Percusión" />
                 <FormControlLabel value="Canto" control={<Radio />} label="Canto" />
                 <FormControlLabel value="Otros" control={<Radio />} label="Otros" />
+              </RadioGroup> */}
+              <RadioGroup
+                name="clases"
+                value={formValues.clases}
+                onChange={handleChange}
+              >
+              
+                <Grid container spacing={1}>
+                  {/* Primera columna */}
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      value="Piano"
+                      control={<Radio />}
+                      label="Piano"
+                    />
+                    <FormControlLabel
+                      value="Guitarra"
+                      control={<Radio />}
+                      label="Guitarra"
+                    />
+                     <FormControlLabel
+                      value="Otros"
+                      control={<Radio />}
+                      label="Otros"
+                    />
+                  </Grid>
+
+                  {/* Segunda columna */}
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      value="Percusión"
+                      control={<Radio />}
+                      label="Percusión"
+                    />
+                    <FormControlLabel
+                      value="Canto"
+                      control={<Radio />}
+                      label="Canto"
+                    />
+                   
+                    
+                  </Grid>
+                </Grid>
               </RadioGroup>
               {/* Este componente mostrará el mensaje de error */}
-              {errors.clases && <FormHelperText>{errors.clases}</FormHelperText>}
+              {errors.clases && (
+                <FormHelperText>{errors.clases}</FormHelperText>
+              )}
             </FormControl>
           </Grid>
 
-
           <Grid item xs={12} md={6}>
             <FormControl fullWidth margin="normal" error={!!errors.dia}>
-              <InputLabel 
-              // sx={{
-              //   '&.Mui-focused': {
-              //     color: '#9AB1BC', // Cambia esto al color que quieras
-              //   }
-              // }}
-              sx={{
-                '&.Mui-focused': {
-                  color: '#9AB1BC', // Color cuando está enfocado
-                },
-                '&.MuiInputLabel-shrink': {
-                  marginTop: '-8px', // Ajusta este valor según necesites
-                  // Otros ajustes de posicionamiento o espaciado
-                }
-              }} 
-              id="dia-label">Día</InputLabel>
+              <InputLabel
+                // sx={{
+                //   '&.Mui-focused': {
+                //     color: '#9AB1BC', // Cambia esto al color que quieras
+                //   }
+                // }}
+                sx={{
+                  "&.Mui-focused": {
+                    color: "#9AB1BC", // Color cuando está enfocado
+                  },
+                  "&.MuiInputLabel-shrink": {
+                    marginTop: "-8px", // Ajusta este valor según necesites
+                    // Otros ajustes de posicionamiento o espaciado
+                  },
+                }}
+                id="dia-label"
+              >
+                Día
+              </InputLabel>
               <CustomSelect
                 labelId="dia-label"
                 name="dia"
@@ -423,8 +484,8 @@ console.log(-4 > 0);
                   checked={formValues.participaMuestra}
                   onChange={handleChange}
                   sx={{
-                    '&.Mui-checked': {
-                      color: '#9AB1BC', // Cambia el color del checkbox cuando está marcado
+                    "&.Mui-checked": {
+                      color: "#9AB1BC", // Cambia el color del checkbox cuando está marcado
                     },
                   }}
                 />
@@ -438,28 +499,28 @@ console.log(-4 > 0);
               label="Estilo de música preferido"
               name="estiloMusica"
               value={formValues.estiloMusica}
-              onFocus={() => handleFocus('estiloMusica')}
+              onFocus={() => handleFocus("estiloMusica")}
               onChange={handleChange}
               margin="normal"
               fullWidth
               inputProps={{ maxLength: 80 }}
               sx={{
-                '& .MuiInputLabel-root': {
-                  '&.Mui-focused, &.MuiInputLabel-shrink': {
-                    color: '#9AB1BC',
+                "& .MuiInputLabel-root": {
+                  "&.Mui-focused, &.MuiInputLabel-shrink": {
+                    color: "#9AB1BC",
                   },
                 },
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)': {
-                    '& fieldset': {
-                      borderColor: '#9AB1BC',
-                    }
-                  }
-                }
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                    {
+                      "& fieldset": {
+                        borderColor: "#9AB1BC",
+                      },
+                    },
+                },
               }}
             />
           </Grid>
-
         </Grid>
 
         <Grid
@@ -470,7 +531,7 @@ console.log(-4 > 0);
           alignItems="center"
         >
           <Button
-            className='botonEnviarFormPreInscripcion'
+            className="botonEnviarFormPreInscripcion"
             type="submit"
             variant="contained"
             sx={{ marginTop: 2 }}
@@ -480,7 +541,6 @@ console.log(-4 > 0);
         </Grid>
       </form>
     </Box>
-    
   );
 };
 
