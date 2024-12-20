@@ -9,8 +9,8 @@ const Home = () => {
     flexDirection: 'column', // Cambia la dirección a columna
     justifyContent: 'center',
     alignItems: 'center',
-    height: '98vh',
-    gap: '16px', // Espaciado entre elementos
+    height: '95vh',
+    gap: '8px', // Espaciado entre elementos
   };
 
   const imageStyle = {
