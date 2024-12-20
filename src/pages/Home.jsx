@@ -1,5 +1,5 @@
 import React from 'react';
-import logoAcorde from "../assets/logoColor.jpg";
+import logoAcorde from "../assets/logoAcorde.jpeg";
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,13 +9,13 @@ const Home = () => {
     flexDirection: 'column', // Cambia la dirección a columna
     justifyContent: 'center',
     alignItems: 'center',
-    height: '90vh',
+    height: '98vh',
     gap: '16px', // Espaciado entre elementos
   };
 
   const imageStyle = {
-    maxWidth: '100%',
-    maxHeight: '100%', // Ajusta la altura máxima si es necesario
+    maxWidth: '100vw',
+    maxHeight: '100vh', // Ajusta la altura máxima si es necesario
     borderRadius: '8px', // Borde opcional para estilizar
   };
 
@@ -27,7 +27,9 @@ const Home = () => {
         alt="Centrada" 
         style={imageStyle} 
       />
-      <Button className='botonInicialAcorde' onClick={()=>navigate("/formInicial")} variant="outlined">pre inscripcion</Button>
+      <p>¿Querés mas info?</p>
+      <Button size="large" className='botonInicialAcorde' onClick={()=>navigate("/formInicial")} variant="outlined">PRE-INSCRIBITE</Button>
+      <p>y te contamos mas!</p>
     </div>
   );
 };

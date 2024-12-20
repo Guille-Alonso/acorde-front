@@ -88,19 +88,25 @@ console.log(-4 > 0);
     },
   }));
 
+  const containerStyle = {
+    display: 'flex',
+    flexDirection: 'column', // Cambia la dirección a columna
+    justifyContent: 'center',
+    alignItems: 'center'
+  };
+
+
   return (
-  
+  <div style={containerStyle}>
+
     <Box
     sx={{
       maxWidth: 800,
-      margin: 'auto', // Esto centrará horizontalmente
       padding: '20px',
       boxShadow: 3,
       borderRadius: 2,
       backgroundColor: '#f9f9f9',
-      display: 'flex',
-      flexDirection: 'column', // Para mantener el contenido vertical
-      alignItems: 'center', // Centrar contenido horizontalmente
+      marginTop: 1
     }}
     >
       <form onSubmit={handleSubmit}>
@@ -480,6 +486,7 @@ console.log(-4 > 0);
         </Grid>
       </form>
     </Box>
+  </div>
     
   );
 };
