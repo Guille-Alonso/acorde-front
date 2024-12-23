@@ -159,7 +159,7 @@ console.log(-4 > 0);
       <Box
         sx={{
           maxWidth: 800,
-          padding: "20px",
+          padding: "10px",
           boxShadow: 3,
           borderRadius: 2,
           // backgroundColor: "#f9f9f9",
