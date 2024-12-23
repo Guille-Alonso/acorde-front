@@ -28,7 +28,7 @@ const Home = () => {
         style={imageStyle} 
       />
       <p>¿Querés mas info?</p>
-      <Button size="large" className='botonInicialAcorde' onClick={()=>navigate("/formInicial")} variant="outlined">PRE-INSCRIBITE</Button>
+      <Button  sx={{ margin: "20px 0" }} size="large" className='botonInicialAcorde' onClick={()=>navigate("/formInicial")} variant="outlined">PRE-INSCRIBITE</Button>
       <p>y te contamos mas!</p>
     </div>
   );

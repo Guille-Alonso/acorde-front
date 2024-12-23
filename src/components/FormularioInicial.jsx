@@ -162,7 +162,7 @@ console.log(-4 > 0);
           padding: "20px",
           boxShadow: 3,
           borderRadius: 2,
-          backgroundColor: "#f9f9f9",
+          // backgroundColor: "#f9f9f9",
           marginTop: 1,
         }}
       >
@@ -178,7 +178,7 @@ console.log(-4 > 0);
         <form onSubmit={handleSubmit}>
           <Grid container sx={{ marginTop: 2 }}>
             <p className="colorDatosAlumno" component="legend">
-              DATOS DEL ALUMNO/A
+              Datos del alumno/a
             </p>
             <Grid container columnSpacing={2}>
               <Grid item xs={12} md={6}>
@@ -325,7 +325,7 @@ console.log(-4 > 0);
             </Grid>
 
             <p className="colorDatosAlumno" component="legend">
-              DATOS DE PADRE/MADRE
+              Datos de padre/madre
             </p>
             <Grid container columnSpacing={2}>
               <Grid item xs={12} md={6}>
@@ -493,19 +493,54 @@ console.log(-4 > 0);
                 </Grid>
                 <FormLabel className="preguntarSobreClases">¿Cuál?</FormLabel>
 
-                {errors.clases && (
-                  <FormHelperText>{errors.clases}</FormHelperText>
+                <Grid item xs={12}>
+                <TextField
+                  label="Escribí el instrumento que quieras"
+                  name="otroInstrumento"
+                  value={formValues.otroInstrumento}
+                  onChange={(e) => {
+                    // Verificar si el input contiene solo letras y acentos
+                    if (/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(e.target.value)) {
+                      handleChange(e);
+                    }
+                  }}
+                  inputProps={{ maxLength: 30 }}
+                  onFocus={() => handleFocus("otroInstrumento")}
+                  margin="normal"
+                  error={!!errors.otroInstrumento}
+                  helperText={errors.otroInstrumento}
+                  fullWidth
+                  sx={{
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused, &.MuiInputLabel-shrink": {
+                        color: "#DFA57C",
+                      },
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                        {
+                          "& fieldset": {
+                            borderColor: "#9AB1BC",
+                          },
+                        },
+                    },
+                  }}
+                />
+              </Grid>
+
+                {errors.otroInstrumento && (
+                  <FormHelperText>{errors.otroInstrumento}</FormHelperText>
                 )}
               </FormControl>
 
               <FormLabel
-                className="preguntarSobreClases colorDatosAlumno"
+                className="preguntarSobreClases colorDatosClases"
                 component="legend"
               >
                 *Las clases serán de 18.30hs a 20hs una vez por semana.
               </FormLabel>
               <FormLabel
-                className="preguntarSobreClases colorDatosAlumno"
+                className="preguntarSobreClases colorDatosClases"
                 component="legend"
               >
                 Selecciona los días en los que SI podrías asistir
@@ -523,14 +558,14 @@ console.log(-4 > 0);
                   },
                   "& .MuiOutlinedInput-root.Mui-focused": {
                     "& fieldset": {
-                      borderColor: "#9AB1BC", // Color que toma el campo en foco
+                      borderColor: "#DFA57C", // Color que toma el campo en foco
                     },
                   },
                   "& .MuiCheckbox-root.Mui-checked": {
-                    color: "#9AB1BC", // Cambia el color cuando está marcado
+                    color: "#DFA57C", // Cambia el color cuando está marcado
                   },
                   "& .MuiFormLabel-root:not(.Mui-focused)": {
-                    color: "#9AB1BC", // Color que se mantiene cuando pierde el foco
+                    color: "#DFA57C", // Color que se mantiene cuando pierde el foco
                   },
                 }}
               >
