@@ -17,9 +17,11 @@ import {
   styled,
   StepLabel,
 } from '@mui/material';
-import nenaInicio from "../assets/nenaInicio.jpg"
+// import nenaInicio from "../assets/nenaInicio.jpg"
+import nenaInicio from "../assets/inicioForm.jpg"
 import rubitoConGuitarra from "../assets/rubitoConGuitarra.jpg"
 import luchaCanta from "../assets/luchaCanta.jpg"
+import cantora from "../assets/cantoraRec.jpg"
 import pibeOk from "../assets/pibeOk.jpg"
 import "./FormularioInicial.css"
 const FormularioInicial = () => {
@@ -109,14 +111,14 @@ console.log(-4 > 0);
   };
 
   const imageStyleRubitoConGuitarra = {
-    maxWidth: '90vw',
-    maxHeight: '40vh', // Ajusta la altura máxima si es necesario
+    maxWidth: '100vw',
+    maxHeight: '55vh', // Ajusta la altura máxima si es necesario
     borderRadius: '8px', // Borde opcional para estilizar
   };
 
   const imageStylePibeOK = {
     maxWidth: '90vw',
-    maxHeight: '40vh', // Ajusta la altura máxima si es necesario
+    maxHeight: '50vh', // Ajusta la altura máxima si es necesario
     borderRadius: '8px', // Borde opcional para estilizar
   };
 
@@ -388,12 +390,9 @@ console.log(-4 > 0);
                 />
               </Grid>
               <Grid container style={containerStyle}>
-                <img
-                  src={rubitoConGuitarra}
-                  alt="Centrada"
-                  style={imageStyleRubitoConGuitarra}
-                />
+              <img src={luchaCanta} alt="Centrada" style={imageStylePibeOK} />
               </Grid>
+
             </Grid>
 
             <Grid item xs={12}>
@@ -626,9 +625,17 @@ console.log(-4 > 0);
                     />
 
                     {/* </Grid> */}
+
                   </Grid>
-                    <img src={luchaCanta} alt="Centrada" style={imageStylePibeOK} />
+                
+                    <img
+                  src={rubitoConGuitarra}
+                  alt="Centrada"
+                  style={imageStyleRubitoConGuitarra}
+                />
                 </Grid>
+
+             
                 {errors.dias && <FormHelperText>{errors.dias}</FormHelperText>}
               </FormControl>
             </Grid>
@@ -808,12 +815,12 @@ y shows abiertos al público?
             justifyContent="center"
             alignItems="center"
           >
-               <img src={pibeOk} alt="Centrada" style={imageStylePibeOK} />
+               <img src={cantora} alt="Centrada" style={imageStylePibeOK} />
             <Button
               className="botonEnviarFormPreInscripcion"
               type="submit"
               variant="contained"
-              sx={{ marginTop: 2 }}
+              sx={{ marginTop: 1 }}
             >
               Enviar
             </Button>
