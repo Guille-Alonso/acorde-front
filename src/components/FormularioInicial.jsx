@@ -128,6 +128,7 @@ console.log(-4 > 0);
     setFormValues((prevState) => {
       if (checked) {
         // Agregar al array
+        
         return { ...prevState, clases: [...prevState.clases, value] };
       } else {
         // Quitar del array
@@ -362,7 +363,37 @@ console.log(-4 > 0);
 
               <Grid item xs={12} md={6}>
                 <TextField
-                  label="Teléfono de contacto"
+                  label="Apellido"
+                  name="apellidoPadre"
+                  value={formValues.apellidoPadre}
+                  onChange={handleChange}
+                  inputProps={{ maxLength: 40 }}
+                  onFocus={() => handleFocus("apellidoPadre")}
+                  margin="normal"
+                  fullWidth
+                  error={!!errors.apellidoPadre}
+                  helperText={errors.apellidoPadre}
+                  sx={{
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused, &.MuiInputLabel-shrink": {
+                        color: "#DFA57C",
+                      },
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                        {
+                          "& fieldset": {
+                            borderColor: "#DFA57C",
+                          },
+                        },
+                    },
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Número de celular"
                   name="telefonoPadre"
                   value={formValues.telefonoPadre}
                   onChange={handleChange}
@@ -420,11 +451,31 @@ console.log(-4 > 0);
                 }}
               >
                 <FormLabel className="preguntarSobreClases" component="legend">
-                  ¿Te gustaría aprender algún instrumento o canto?
+                  ¿Qué te gustaría aprender?
                 </FormLabel>
                 <Grid container style={containerStyle}>
                   <Grid>
                     {/* <Grid item xs={6}> */}
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={formValues.clases.includes("Canto")}
+                          onChange={handleCheckboxChangeClases}
+                          value="Canto"
+                        />
+                      }
+                      label="Canto"
+                    />
+                        <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={formValues.clases.includes("Guitarra")}
+                          onChange={handleCheckboxChangeClases}
+                          value="Guitarra"
+                        />
+                      }
+                      label="Guitarra"
+                    />
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -445,16 +496,7 @@ console.log(-4 > 0);
                       }
                       label="Violín"
                     />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={formValues.clases.includes("Guitarra")}
-                          onChange={handleCheckboxChangeClases}
-                          value="Guitarra"
-                        />
-                      }
-                      label="Guitarra"
-                    />
+                
                     {/* </Grid> */}
                     {/* <Grid item xs={6}> */}
                     <FormControlLabel
@@ -467,16 +509,7 @@ console.log(-4 > 0);
                       }
                       label="Percusión"
                     />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={formValues.clases.includes("Canto")}
-                          onChange={handleCheckboxChangeClases}
-                          value="Canto"
-                        />
-                      }
-                      label="Canto"
-                    />
+                
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -485,16 +518,18 @@ console.log(-4 > 0);
                           value="Otro"
                         />
                       }
-                      label="Otro Instrumento"
+                      label="Otros"
                     />
                     {/* </Grid> */}
                   </Grid>
                 </Grid>
-                <FormLabel className="preguntarSobreClases">¿Cuál?</FormLabel>
+                {/* <FormLabel className="preguntarSobreClases">¿Cuál?</FormLabel> */}
 
+{
+  formValues.clases.includes("Otro") &&
                 <Grid item xs={12}>
                 <TextField
-                  label="Escribí el instrumento que quieras"
+                  label="¿Cuál?"
                   name="otroInstrumento"
                   value={formValues.otroInstrumento}
                   onChange={(e) => {
@@ -526,6 +561,7 @@ console.log(-4 > 0);
                   }}
                 />
               </Grid>
+}
 
                 {errors.otroInstrumento && (
                   <FormHelperText>{errors.otroInstrumento}</FormHelperText>

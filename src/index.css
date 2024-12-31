@@ -21,14 +21,6 @@
   background-color: #9AB1BC !important;
 }
 
-.ave{
-  position: absolute !important;
-  top: 68vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center !important;
-}
-
 .masInfo{
   text-align: center;
 }

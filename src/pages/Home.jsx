@@ -10,13 +10,12 @@ const Home = () => {
     flexDirection: 'column', // Cambia la dirección a columna
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh',
-    gap: '8px', // Espaciado entre elementos
+    height: '100vh'
   };
 
   const imageStyle = {
     maxWidth: '100vw',
-    maxHeight: '60vh', // Ajusta la altura máxima si es necesario
+    maxHeight: '70vh', // Ajusta la altura máxima si es necesario
     borderRadius: '8px', // Borde opcional para estilizar
   };
 
