@@ -30,15 +30,18 @@ const FormularioInicial = () => {
     apellido: '',
     edad: '',
     numCel: '',
-    nombreMadre: '',
     nombrePadre: '',
+    telefonoPadre: '',
+    apellidoPadre: '',
+    emailPadre: '',
     nivel: '',
     clases: [],
     dia: '',
     dias:[],
     participaMuestra: false,
     estiloMusica: '',
-    comentario: ''
+    comentario: '',
+    otroInstrumento: ''
   });
 
   const [errors, setErrors] = useState({});
@@ -46,6 +49,7 @@ const [focusedField, setFocusedField] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    validate();
     setFormValues({
       ...formValues,
       [name]: type === 'checkbox' ? checked : value,
@@ -59,20 +63,27 @@ const handleFocus = (name) => {
 
   const validate = () => {
     const newErrors = {};
-console.log(-4 > 0);
 
     if (!formValues.nombre) newErrors.nombre = 'El nombre es obligatorio';
     if (!formValues.apellido) newErrors.apellido = 'El apellido es obligatorio';
-    if (!formValues.edad || isNaN(formValues.edad) || !Number(formValues.edad) > 0 || Number(formValues.edad) < 7)
+    if (!formValues.edad || isNaN(formValues.edad) || !Number(formValues.edad) > 0 || Number(formValues.edad) < 7 || formValues.edad < 7)
       newErrors.edad = 'Debe tener como mínimo 7 años';
-    if (!formValues.numCel || isNaN(formValues.numCel))
-      newErrors.numCel = 'Debe ingresar un número de celular válido';
+
+    // if (!formValues.numCel || isNaN(formValues.numCel))
+    //   newErrors.numCel = 'Debe ingresar un número de celular válido';
 
     if (!formValues.nombrePadre) newErrors.nombrePadre = 'El nombre del padre es obligatorio';
-    if (!formValues.nombreMadre) newErrors.nombreMadre = 'El nombre de la madre es obligatorio';
+    if (!formValues.apellidoPadre) newErrors.apellidoPadre = 'El apellido del padre es obligatorio';
+    if (!formValues.telefonoPadre) newErrors.telefonoPadre = 'Debe ingresar un teléfono de contacto';
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!formValues.emailPadre || !emailRegex.test(formValues.emailPadre)) newErrors.emailPadre = 'Debe ingresar un email válido'
     if (!formValues.nivel) newErrors.nivel = 'Seleccione un nivel de aprendizaje';
-    if (!formValues.clases.length) newErrors.clases = 'Seleccione una clase';
-    if (!formValues.dia) newErrors.dia = 'Seleccione un día para las clases';
+    if (formValues.clases.length == 0) newErrors.clases = 'Seleccione al menos una clase';
+    if (formValues.dias.length == 0) newErrors.dias = 'Seleccione al menos un día';
+
+    if (formValues.clases.includes("Otro") && !formValues.otroInstrumento) newErrors.otroInstrumento = 'Debe ingresar un instrumento';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -336,7 +347,12 @@ console.log(-4 > 0);
                   label="Nombre"
                   name="nombrePadre"
                   value={formValues.nombrePadre}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    // Verificar si el input contiene solo letras y acentos
+                    if (/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(e.target.value)) {
+                      handleChange(e);
+                    }
+                  }}
                   inputProps={{ maxLength: 40 }}
                   onFocus={() => handleFocus("nombrePadre")}
                   margin="normal"
@@ -366,7 +382,12 @@ console.log(-4 > 0);
                   label="Apellido"
                   name="apellidoPadre"
                   value={formValues.apellidoPadre}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    // Verificar si el input contiene solo letras y acentos
+                    if (/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(e.target.value)) {
+                      handleChange(e);
+                    }
+                  }}
                   inputProps={{ maxLength: 40 }}
                   onFocus={() => handleFocus("apellidoPadre")}
                   margin="normal"
@@ -396,8 +417,13 @@ console.log(-4 > 0);
                   label="Número de celular"
                   name="telefonoPadre"
                   value={formValues.telefonoPadre}
-                  onChange={handleChange}
-                  inputProps={{ maxLength: 40 }}
+                  onChange={(e) => {
+                    // Verificar si el input contiene solo números
+                    if (/^\d*$/.test(e.target.value)) {
+                      handleChange(e);
+                    }
+                  }}
+                  inputProps={{ maxLength: 12 }}
                   onFocus={() => handleFocus("telefonoPadre")}
                   margin="normal"
                   fullWidth
@@ -420,10 +446,38 @@ console.log(-4 > 0);
                   }}
                 />
               </Grid>
-              <Grid container style={containerStyle}>
-              <img src={luchaCanta} alt="Centrada" style={imageStylePibeOK} />
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Email"
+                  name="emailPadre"
+                  value={formValues.emailPadre}
+                  onChange={handleChange}
+                  inputProps={{ maxLength: 40 }}
+                  onFocus={() => handleFocus("emailPadre")}
+                  margin="normal"
+                  fullWidth
+                  error={!!errors.emailPadre}
+                  helperText={errors.emailPadre}
+                  sx={{
+                    "& .MuiInputLabel-root": {
+                      "&.Mui-focused, &.MuiInputLabel-shrink": {
+                        color: "#DFA57C",
+                      },
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                        {
+                          "& fieldset": {
+                            borderColor: "#DFA57C",
+                          },
+                        },
+                    },
+                  }}
+                />
               </Grid>
-
+              <Grid container style={containerStyle}>
+                <img src={luchaCanta} alt="Centrada" style={imageStylePibeOK} />
+              </Grid>
             </Grid>
 
             <Grid item xs={12}>
@@ -431,8 +485,11 @@ console.log(-4 > 0);
                 component="fieldset"
                 margin="normal"
                 fullWidth
+                value={formValues.clases}
                 onFocus={() => handleFocus("clases")}
                 error={!!errors.clases}
+                // helperText={errors.clases}
+                name="clases"
                 sx={{
                   "& .MuiFormLabel-root.Mui-focused": {
                     color: focusedField === "clases" ? "#9AB1BC" : undefined,
@@ -466,7 +523,7 @@ console.log(-4 > 0);
                       }
                       label="Canto"
                     />
-                        <FormControlLabel
+                    <FormControlLabel
                       control={
                         <Checkbox
                           checked={formValues.clases.includes("Guitarra")}
@@ -496,7 +553,7 @@ console.log(-4 > 0);
                       }
                       label="Violín"
                     />
-                
+
                     {/* </Grid> */}
                     {/* <Grid item xs={6}> */}
                     <FormControlLabel
@@ -509,7 +566,7 @@ console.log(-4 > 0);
                       }
                       label="Percusión"
                     />
-                
+
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -522,50 +579,49 @@ console.log(-4 > 0);
                     />
                     {/* </Grid> */}
                   </Grid>
+                  {errors.clases && formValues.clases.length == 0 && <FormHelperText>{errors.clases}</FormHelperText>}
                 </Grid>
                 {/* <FormLabel className="preguntarSobreClases">¿Cuál?</FormLabel> */}
 
-{
-  formValues.clases.includes("Otro") &&
-                <Grid item xs={12}>
-                <TextField
-                  label="¿Cuál?"
-                  name="otroInstrumento"
-                  value={formValues.otroInstrumento}
-                  onChange={(e) => {
-                    // Verificar si el input contiene solo letras y acentos
-                    if (/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(e.target.value)) {
-                      handleChange(e);
-                    }
-                  }}
-                  inputProps={{ maxLength: 30 }}
-                  onFocus={() => handleFocus("otroInstrumento")}
-                  margin="normal"
-                  error={!!errors.otroInstrumento}
-                  helperText={errors.otroInstrumento}
-                  fullWidth
-                  sx={{
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused, &.MuiInputLabel-shrink": {
-                        color: "#DFA57C",
-                      },
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
-                        {
-                          "& fieldset": {
-                            borderColor: "#9AB1BC",
+                {formValues.clases.includes("Otro") && (
+                  <Grid item xs={12}>
+                    <TextField
+                      label="¿Cuál?"
+                      name="otroInstrumento"
+                      value={formValues.otroInstrumento}
+                      onChange={(e) => {
+                        // Verificar si el input contiene solo letras y acentos
+                        if (/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(e.target.value)) {
+                          handleChange(e);
+                        }
+                      }}
+                      inputProps={{ maxLength: 30 }}
+                      onFocus={() => handleFocus("otroInstrumento")}
+                      margin="normal"
+                      error={!!errors.otroInstrumento}
+                      fullWidth
+                      sx={{
+                        "& .MuiInputLabel-root": {
+                          "&.Mui-focused, &.MuiInputLabel-shrink": {
+                            color: "#9AB1BC",
                           },
                         },
-                    },
-                  }}
-                />
-              </Grid>
-}
-
+                        "& .MuiOutlinedInput-root": {
+                          "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
+                            {
+                              "& fieldset": {
+                                borderColor: "#9AB1BC",
+                              },
+                            },
+                        },
+                      }}
+                    />
                 {errors.otroInstrumento && (
-                  <FormHelperText>{errors.otroInstrumento}</FormHelperText>
+                    <FormHelperText>{errors.otroInstrumento}</FormHelperText>
+                  )}
+                  </Grid>
                 )}
+
               </FormControl>
 
               <FormLabel
@@ -585,11 +641,13 @@ console.log(-4 > 0);
                 component="fieldset"
                 margin="normal"
                 fullWidth
-                onFocus={() => handleFocus("clases")}
-                error={!!errors.clases}
+                value={formValues.dias}
+                onFocus={() => handleFocus("dias")}
+                error={!!errors.dias}
+                name="dias"
                 sx={{
                   "& .MuiFormLabel-root.Mui-focused": {
-                    color: focusedField === "clases" ? "#9AB1BC" : undefined,
+                    color: focusedField === "dias" ? "#9AB1BC" : undefined,
                   },
                   "& .MuiOutlinedInput-root.Mui-focused": {
                     "& fieldset": {
@@ -661,18 +719,16 @@ console.log(-4 > 0);
                     />
 
                     {/* </Grid> */}
-
                   </Grid>
-                
-                    <img
-                  src={rubitoConGuitarra}
-                  alt="Centrada"
-                  style={imageStyleRubitoConGuitarra}
-                />
+                  {errors.dias && formValues.dias.length == 0 && (
+                    <FormHelperText>{errors.dias}</FormHelperText>
+                  )}
+                  <img
+                    src={rubitoConGuitarra}
+                    alt="Centrada"
+                    style={imageStyleRubitoConGuitarra}
+                  />
                 </Grid>
-
-             
-                {errors.dias && <FormHelperText>{errors.dias}</FormHelperText>}
               </FormControl>
             </Grid>
 
@@ -725,7 +781,7 @@ console.log(-4 > 0);
                   />
                 </RadioGroup>
                 {/* Este componente mostrará el mensaje de error */}
-                {errors.nivel && (
+                {errors.nivel && !formValues.nivel && (
                   <FormHelperText>{errors.nivel}</FormHelperText>
                 )}
               </FormControl>
@@ -847,11 +903,11 @@ y shows abiertos al público?
             item
             xs={12}
             display="flex"
-            flexDirection= 'column'
+            flexDirection="column"
             justifyContent="center"
             alignItems="center"
           >
-               <img src={cantora} alt="Centrada" style={imageStylePibeOK} />
+            <img src={cantora} alt="Centrada" style={imageStylePibeOK} />
             <Button
               className="botonEnviarFormPreInscripcion"
               type="submit"
