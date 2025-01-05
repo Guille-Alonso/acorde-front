@@ -16,6 +16,8 @@ import {
   FormHelperText,
   styled,
   StepLabel,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 // import nenaInicio from "../assets/nenaInicio.jpg"
 import nenaInicio from "../assets/inicioForm.jpg"
@@ -89,22 +91,26 @@ const handleFocus = (name) => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const [botonState, setBotonState] = useState(false)
   const handleSubmit = async (e) => {
+    setBotonState(true);
     e.preventDefault();
     try {
       if (validate()) {
         console.log('Formulario válido:', formValues);
-        alert('Formulario enviado correctamente');
+        // alert('Formulario enviado correctamente');
         const {data} = await axios.post("formularios/preInscripcion",formValues)
-        console.log(data);
-        
+        // console.log(data);
+        handleOpenNotify()
       } else {
         console.log('Errores en el formulario:', errors);
       }
     } catch (error) {
+      alert("intente nuevamente mas tarde..")
       console.log(error)
+      setBotonState(false);
     }
-
+    setBotonState(false);
   };
 
   const CustomSelect = styled(Select)(({ theme }) => ({
@@ -175,6 +181,21 @@ const handleFocus = (name) => {
       }
     });
   };
+
+  const [open, setOpen] = useState(false);
+
+  // Función para manejar la apertura y cierre de la alerta
+  const handleOpenNotify = () => {
+    setOpen(true); // Mostrar la alerta
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return; // Ignorar el cierre al hacer clic fuera
+    }
+    setOpen(false); // Cerrar la alerta
+  };
+
 
   return (
     <div style={containerStyle}>
@@ -920,6 +941,7 @@ y shows abiertos al público?
               className="botonEnviarFormPreInscripcion"
               type="submit"
               variant="contained"
+              disabled={botonState}
               sx={{ marginTop: 1 }}
             >
               Enviar
@@ -927,6 +949,18 @@ y shows abiertos al público?
           </Grid>
         </form>
       </Box>
+
+      <Snackbar
+        open={open}
+        autoHideDuration={6000} // La alerta se cierra automáticamente después de 6 segundos
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }} // Posición de la alerta
+      >
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          ¡Preinscripción exitosa!
+        </Alert>
+      </Snackbar>
+
     </div>
   );
 };
