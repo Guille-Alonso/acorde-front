@@ -595,7 +595,7 @@ const handleFocus = (name) => {
                           handleChange(e);
                         }
                       }}
-                      inputProps={{ maxLength: 30 }}
+                      inputProps={{ maxLength: 80 }}
                       onFocus={() => handleFocus("otroInstrumento")}
                       margin="normal"
                       error={!!errors.otroInstrumento}
@@ -617,7 +617,7 @@ const handleFocus = (name) => {
                       }}
                     />
                 {errors.otroInstrumento && (
-                    <FormHelperText>{errors.otroInstrumento}</FormHelperText>
+                    <FormHelperText style={{ color: "#d32f2f" }}>{errors.otroInstrumento}</FormHelperText>
                   )}
                   </Grid>
                 )}
