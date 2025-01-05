@@ -24,6 +24,7 @@ import luchaCanta from "../assets/luchaCanta.jpg"
 import cantora from "../assets/cantoraRec.jpg"
 import pibeOk from "../assets/pibeOk.jpg"
 import "./FormularioInicial.css"
+import { axios } from '../config/axios';
 const FormularioInicial = () => {
   const [formValues, setFormValues] = useState({
     nombre: '',
@@ -36,7 +37,6 @@ const FormularioInicial = () => {
     emailPadre: '',
     nivel: '',
     clases: [],
-    dia: '',
     dias:[],
     participaMuestra: false,
     estiloMusica: '',
@@ -89,14 +89,22 @@ const handleFocus = (name) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      console.log('Formulario válido:', formValues);
-      alert('Formulario enviado correctamente');
-    } else {
-      console.log('Errores en el formulario:', errors);
+    try {
+      if (validate()) {
+        console.log('Formulario válido:', formValues);
+        alert('Formulario enviado correctamente');
+        const {data} = await axios.post("formularios/preInscripcion",formValues)
+        console.log(data);
+        
+      } else {
+        console.log('Errores en el formulario:', errors);
+      }
+    } catch (error) {
+      console.log(error)
     }
+
   };
 
   const CustomSelect = styled(Select)(({ theme }) => ({
