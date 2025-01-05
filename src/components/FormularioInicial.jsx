@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   TextField,
   Button,
@@ -18,40 +18,28 @@ import {
   StepLabel,
   Snackbar,
   Alert,
+  useMediaQuery,
 } from '@mui/material';
-// import nenaInicio from "../assets/nenaInicio.jpg"
 import nenaInicio from "../assets/inicioForm.jpg"
+import niñopianocortado from "../assets/niñopianocortado.jpg"
 import rubitoConGuitarra from "../assets/rubitoConGuitarra.jpg"
 import luchaCanta from "../assets/luchaCanta.jpg"
 import cantora from "../assets/cantoraRec.jpg"
 import pibeOk from "../assets/pibeOk.jpg"
 import "./FormularioInicial.css"
 import { axios } from '../config/axios';
-const FormularioInicial = () => {
-  const [formValues, setFormValues] = useState({
-    nombre: '',
-    apellido: '',
-    edad: '',
-    numCel: '',
-    nombrePadre: '',
-    telefonoPadre: '',
-    apellidoPadre: '',
-    emailPadre: '',
-    nivel: '',
-    clases: [],
-    dias:[],
-    participaMuestra: false,
-    estiloMusica: '',
-    comentario: '',
-    otroInstrumento: ''
-  });
+import { PREINSCRIPCION_VALUES } from '../helpers';
+import { useNavigate } from 'react-router-dom';
 
-  const [errors, setErrors] = useState({});
+const FormularioInicial = () => {
+  const [formValues, setFormValues] = useState(PREINSCRIPCION_VALUES);
+
+const [errors, setErrors] = useState({});
 const [focusedField, setFocusedField] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    validate();
+    // validate();
     setFormValues({
       ...formValues,
       [name]: type === 'checkbox' ? checked : value,
@@ -62,36 +50,89 @@ const handleFocus = (name) => {
   setFocusedField(name);
 };
 
+const otroRef = useRef(null);
+
+const nombreAlumnoRef = useRef(null);
+const apellidoAlumnoRef = useRef(null);
+const edadAlumnoRef = useRef(null);
+
+const nombrePadreRef = useRef(null);
+const apellidoPadreRef = useRef(null);
+const telefonoPadreRef = useRef(null);
+const emailPadreRef = useRef(null);
+
+const clasesRef = useRef(null);
+const diasRef = useRef(null);
+const nivelRef = useRef(null);
 
   const validate = () => {
     const newErrors = {};
 
-    if (!formValues.nombre) newErrors.nombre = 'El nombre es obligatorio';
-    if (!formValues.apellido) newErrors.apellido = 'El apellido es obligatorio';
-    if (!formValues.edad || isNaN(formValues.edad) || !Number(formValues.edad) > 0 || Number(formValues.edad) < 7 || formValues.edad < 7)
-      newErrors.edad = 'Debe tener como mínimo 7 años';
+    if (!formValues.nombre){
+      newErrors.nombre = 'El nombre es obligatorio';
+      if (nombreAlumnoRef.current) nombreAlumnoRef.current.focus();
+    } 
 
-    // if (!formValues.numCel || isNaN(formValues.numCel))
-    //   newErrors.numCel = 'Debe ingresar un número de celular válido';
+    if (!formValues.apellido) {
+      newErrors.apellido = 'El apellido es obligatorio';
+      if (apellidoAlumnoRef.current) apellidoAlumnoRef.current.focus();
+    }
 
-    if (!formValues.nombrePadre) newErrors.nombrePadre = 'El nombre del padre es obligatorio';
-    if (!formValues.apellidoPadre) newErrors.apellidoPadre = 'El apellido del padre es obligatorio';
-    if (!formValues.telefonoPadre) newErrors.telefonoPadre = 'Debe ingresar un teléfono de contacto';
+    if (!formValues.edad || isNaN(formValues.edad) || !Number(formValues.edad) > 0 || Number(formValues.edad) < 6 || formValues.edad < 6){
+      newErrors.edad = 'Debe tener como mínimo 6 años';
+      if (edadAlumnoRef.current) edadAlumnoRef.current.focus();
+    }
+
+    if (!formValues.nombrePadre){
+      newErrors.nombrePadre = 'El nombre del padre es obligatorio';
+      if (nombrePadreRef.current) nombrePadreRef.current.focus();
+    } 
+
+    if (!formValues.apellidoPadre){
+      newErrors.apellidoPadre = 'El apellido del padre es obligatorio';
+      if (apellidoPadreRef.current) apellidoPadreRef.current.focus();
+    } 
+
+    if (!formValues.telefonoPadre){
+      newErrors.telefonoPadre = 'Debe ingresar un teléfono de contacto';
+      if (telefonoPadreRef.current) telefonoPadreRef.current.focus();
+    } 
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formValues.emailPadre || !emailRegex.test(formValues.emailPadre)){
+      newErrors.emailPadre = 'Debe ingresar un email válido'
+      if (emailPadreRef.current) emailPadreRef.current.focus();
+    } 
 
-    if (!formValues.emailPadre || !emailRegex.test(formValues.emailPadre)) newErrors.emailPadre = 'Debe ingresar un email válido'
-    if (!formValues.nivel) newErrors.nivel = 'Seleccione un nivel de aprendizaje';
-    if (formValues.clases.length == 0) newErrors.clases = 'Seleccione al menos una clase';
-    if (formValues.dias.length == 0) newErrors.dias = 'Seleccione al menos un día';
+    if (!formValues.nivel){
+      newErrors.nivel = 'Seleccione un nivel de aprendizaje';
+      if (nivelRef.current) nivelRef.current.focus();
+    }
 
-    if (formValues.clases.includes("Otro") && !formValues.otroInstrumento) newErrors.otroInstrumento = 'Debe ingresar un instrumento';
+    if (formValues.clases.length == 0){
+      newErrors.clases = 'Seleccione al menos una clase';
+      if (clasesRef.current) clasesRef.current.focus();
+    } 
+
+    if (formValues.dias.length == 0){
+      newErrors.dias = 'Seleccione al menos un día';
+      if (diasRef.current) diasRef.current.focus();
+    } 
+
+    if (formValues.clases.includes("Otro") && !formValues.otroInstrumento) {
+      newErrors.otroInstrumento = 'Debe ingresar un instrumento';
+      if (otroRef.current) otroRef.current.focus();
+    }
+      
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const [botonState, setBotonState] = useState(false)
+  const [botonState, setBotonState] = useState(false);
+  const [notificacion, setNotificacion] = useState({mensaje:"",tipo:""})
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     setBotonState(true);
     e.preventDefault();
@@ -101,26 +142,25 @@ const handleFocus = (name) => {
         // alert('Formulario enviado correctamente');
         const {data} = await axios.post("formularios/preInscripcion",formValues)
         // console.log(data);
-        handleOpenNotify()
+        setNotificacion({mensaje:"¡Preinscripción exitosa!", tipo:"success"})
+        handleOpenNotify();
+        setFormValues(PREINSCRIPCION_VALUES);
+        
+        setTimeout(() => {
+           navigate("/preinscripcionExitosa")
+        }, 3000);
+       
       } else {
         console.log('Errores en el formulario:', errors);
       }
     } catch (error) {
-      alert("intente nuevamente mas tarde..")
+      handleOpenNotify();
+      setNotificacion({mensaje: error?.response?.data.message || error.message, tipo:"error"})
       console.log(error)
       setBotonState(false);
     }
     setBotonState(false);
   };
-
-  const CustomSelect = styled(Select)(({ theme }) => ({
-    '&.MuiOutlinedInput-root': {
-      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-        borderColor: '#9AB1BC', // Cambia esto al color que quieras
-        borderWidth: '2px', // Opcional: hacer el borde más grueso cuando está enfocado
-      },
-    },
-  }));
 
   const containerStyle = {
     display: 'flex',
@@ -129,10 +169,13 @@ const handleFocus = (name) => {
     alignItems: 'center'
   };
 
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
+
+  // Estilos condicionales
   const imageStyleInicioForm = {
-    maxWidth: '90vw',
-    maxHeight: '90vh', // Ajusta la altura máxima si es necesario
-    borderRadius: '8px', // Borde opcional para estilizar
+    borderRadius: '8px',
+    maxWidth: isSmallScreen ? '100%' : '60vw', // Ancho 100% en pantallas pequeñas, auto en otras
+    maxHeight: isSmallScreen ? 'auto' : '60vh', // Ajusta la altura en pantallas pequeñas
   };
 
   const imageStyleRubitoConGuitarra = {
@@ -160,9 +203,11 @@ const handleFocus = (name) => {
         return {
           ...prevState,
           clases: prevState.clases.filter((clase) => clase !== value),
+          otroInstrumento: value === "Otro" ? "" : prevState.otroInstrumento,
         };
       }
     });
+      
   };
   
 
@@ -210,7 +255,7 @@ const handleFocus = (name) => {
         }}
       >
         <Grid container style={containerStyle}>
-          <img src={nenaInicio} alt="Centrada" style={imageStyleInicioForm} />
+          <img src={niñopianocortado} alt="Centrada" style={imageStyleInicioForm}/>
           <StepLabel sx={{ textAlign: "justify", marginTop: 1 }}>
             Hola! Te ofrecemos este formulario de Pre-Inscripción para la
             academia de ACORDE 2025. Los datos que nos brindes, ayudarán a
@@ -226,6 +271,7 @@ const handleFocus = (name) => {
             <Grid container columnSpacing={2}>
               <Grid item xs={12} md={6}>
                 <TextField
+                 inputRef={nombreAlumnoRef}
                   label="Nombre"
                   name="nombre"
                   value={formValues.nombre}
@@ -263,6 +309,7 @@ const handleFocus = (name) => {
                 <TextField
                   label="Apellido"
                   name="apellido"
+                  inputRef={apellidoAlumnoRef}
                   value={formValues.apellido}
                   onChange={(e) => {
                     // Verificar si el input contiene solo letras y acentos
@@ -296,6 +343,7 @@ const handleFocus = (name) => {
 
               <Grid item xs={12} md={6}>
                 <TextField
+                 inputRef={edadAlumnoRef}
                   label="Edad"
                   name="edad"
                   type="text"
@@ -373,6 +421,7 @@ const handleFocus = (name) => {
             <Grid container columnSpacing={2}>
               <Grid item xs={12} md={6}>
                 <TextField
+                  inputRef={nombrePadreRef}
                   label="Nombre"
                   name="nombrePadre"
                   value={formValues.nombrePadre}
@@ -408,6 +457,7 @@ const handleFocus = (name) => {
 
               <Grid item xs={12} md={6}>
                 <TextField
+                  inputRef={apellidoPadreRef}
                   label="Apellido"
                   name="apellidoPadre"
                   value={formValues.apellidoPadre}
@@ -443,6 +493,7 @@ const handleFocus = (name) => {
 
               <Grid item xs={12} md={6}>
                 <TextField
+                  inputRef={telefonoPadreRef}
                   label="Número de celular"
                   name="telefonoPadre"
                   value={formValues.telefonoPadre}
@@ -477,6 +528,7 @@ const handleFocus = (name) => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
+                  inputRef={emailPadreRef}
                   label="Email"
                   name="emailPadre"
                   value={formValues.emailPadre}
@@ -545,6 +597,7 @@ const handleFocus = (name) => {
                     <FormControlLabel
                       control={
                         <Checkbox
+                          inputRef={clasesRef}
                           checked={formValues.clases.includes("Canto")}
                           onChange={handleCheckboxChangeClases}
                           value="Canto"
@@ -616,6 +669,7 @@ const handleFocus = (name) => {
                   <Grid item xs={12}>
                     <TextField
                       label="¿Cuál?"
+                      inputRef={otroRef}
                       name="otroInstrumento"
                       value={formValues.otroInstrumento}
                       onChange={(e) => {
@@ -645,7 +699,7 @@ const handleFocus = (name) => {
                         },
                       }}
                     />
-                {errors.otroInstrumento && (
+                {errors.otroInstrumento && !formValues.otroInstrumento && (
                     <FormHelperText style={{ color: "#d32f2f" }}>{errors.otroInstrumento}</FormHelperText>
                   )}
                   </Grid>
@@ -697,6 +751,7 @@ const handleFocus = (name) => {
                     <FormControlLabel
                       control={
                         <Checkbox
+                          inputRef={diasRef}
                           checked={formValues.dias.includes("Lunes")}
                           onChange={handleCheckboxChangeDias}
                           value="Lunes"
@@ -792,8 +847,10 @@ const handleFocus = (name) => {
                   name="nivel"
                   value={formValues.nivel}
                   onChange={handleChange}
+                  
                 >
                   <FormControlLabel
+                   inputRef={nivelRef}
                     value="iniciacion"
                     control={<Radio />}
                     label="Iniciación"
@@ -815,43 +872,6 @@ const handleFocus = (name) => {
                 )}
               </FormControl>
             </Grid>
-
-            {/* <Grid item xs={12} md={6}>
-              <FormControl fullWidth margin="normal" error={!!errors.dia}>
-                <InputLabel
-                  // sx={{
-                  //   '&.Mui-focused': {
-                  //     color: '#9AB1BC', // Cambia esto al color que quieras
-                  //   }
-                  // }}
-                  sx={{
-                    "&.Mui-focused": {
-                      color: "#9AB1BC", // Color cuando está enfocado
-                    },
-                    "&.MuiInputLabel-shrink": {
-                      marginTop: "-8px", // Ajusta este valor según necesites
-                      // Otros ajustes de posicionamiento o espaciado
-                    },
-                  }}
-                  id="dia-label"
-                >
-                  Día
-                </InputLabel>
-                <CustomSelect
-                  labelId="dia-label"
-                  name="dia"
-                  value={formValues.dia}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="lunes">Lunes</MenuItem>
-                  <MenuItem value="martes">Martes</MenuItem>
-                  <MenuItem value="miercoles">Miércoles</MenuItem>
-                  <MenuItem value="jueves">Jueves</MenuItem>
-                  <MenuItem value="viernes">Viernes</MenuItem>
-                </CustomSelect>
-                {errors.dia && <FormHelperText>{errors.dia}</FormHelperText>}
-              </FormControl>
-            </Grid> */}
 
             <Grid item xs={12} md={6} marginTop={2.5}>
               <FormControlLabel
@@ -956,8 +976,8 @@ y shows abiertos al público?
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }} // Posición de la alerta
       >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          ¡Preinscripción exitosa!
+        <Alert onClose={handleClose} severity={notificacion.tipo} sx={{ width: "100%" }}>
+          {notificacion.mensaje}
         </Alert>
       </Snackbar>
 

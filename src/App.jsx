@@ -1,6 +1,7 @@
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import FormularioInicial from './components/FormularioInicial'
+import PreInscripcionExitosa from './pages/PreInscripcionExitosa'
 
 function App() {
 
@@ -11,8 +12,8 @@ function App() {
         <Routes>
           {/* <Route element={<Layout />}> */}
             <Route exact path="/*" element={<Home/>} />
-         
             <Route exact path="/formInicial" element={<FormularioInicial/>} />
+            <Route exact path="/preinscripcionExitosa" element={<PreInscripcionExitosa/>} />
           {/* </Route> */}
             {/* <Route exact path="/consultaPadronGeneral" element={<ConsultaPadron/>} /> */}
         </Routes>

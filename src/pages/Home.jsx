@@ -3,6 +3,8 @@ import logoAcorde from "../assets/caratulaAppRecor.jpg";
 import logoAcorde2 from "../assets/caratulaAppRecor2.jpg";
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Home = () => {
   const containerStyle = {
@@ -11,6 +13,13 @@ const Home = () => {
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh'
+  };
+
+  const containerStyleDivButton = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '26px'
   };
 
   const imageStyle = {
@@ -28,22 +37,22 @@ const Home = () => {
   const navigate = useNavigate()
   return (
     <div style={containerStyle}>
-      <img
-        src={logoAcorde}
-        alt="Centrada"
-        style={imageStyle}
-      />
-      <div>
-
-        <p className='masInfo'>¿Querés mas info?</p>
-        <Button sx={{ margin: "15px 0" }} size="large" className='botonInicialAcorde' onClick={() => navigate("/formInicial")} variant="outlined">PRE-INSCRIBITE</Button>
+      <img src={logoAcorde} alt="Centrada" style={imageStyle} />
+      <p className="masInfo">¿Querés mas info?</p>
+      <div style={containerStyleDivButton}>
+        <ArrowForwardIcon fontSize='large' />
+        <Button
+          sx={{ margin: "15px 0" }}
+          size="large"
+          className="botonInicialAcorde"
+          onClick={() => navigate("/formInicial")}
+          variant="outlined"
+        >
+          PRE-INSCRIBITE
+        </Button>
+        <ArrowBackIcon fontSize='large' />
       </div>
-      <img
-        src={logoAcorde2}
-        alt="Centrada"
-        style={imageStyle2}
-      />
-
+      <img src={logoAcorde2} alt="Centrada" style={imageStyle2} />
     </div>
   );
 };
