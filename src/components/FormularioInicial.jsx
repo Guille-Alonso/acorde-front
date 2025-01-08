@@ -711,7 +711,7 @@ const nivelRef = useRef(null);
                 className="preguntarSobreClases colorDatosClases"
                 component="legend"
               >
-                *Las clases serán de 18.30hs a 20hs una vez por semana.
+                Las clases serán de 18.30hs a 20hs, una vez por semana, en Juan XXIII 79 -Yerba Buena (Centro Markay).
               </FormLabel>
               <FormLabel
                 className="preguntarSobreClases colorDatosClases"
