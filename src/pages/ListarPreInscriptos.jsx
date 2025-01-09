@@ -13,7 +13,10 @@ import {
   Box,
   CircularProgress,
   Container,
+  Button,
 } from "@mui/material";
+import { exportToExcel } from "../utils/exportarExcel";
+import { obtenerHoraArgentina } from "../utils/obtenerFechaYHoraActual";
 
 const ListarPreInscriptos = () => {
   const columnas = [
@@ -57,7 +60,17 @@ const ListarPreInscriptos = () => {
     !loadingPreInscriptos &&
     preInscriptos.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
+    const clearArray = (data) => {
+      return data.map(({ _id, __v, ...rest }) => rest);
+    };
+    
+
+    const handleExport = () => {
+      exportToExcel(clearArray(preInscriptos), `Pre-Inscripción al ${obtenerHoraArgentina()}`);
+    };
+
   return (
+    <>
     <Container
       maxWidth={false}
       sx={{ backgroundColor: "#9AB1BC", padding: "16px" }}
@@ -128,6 +141,19 @@ const ListarPreInscriptos = () => {
         </Box>
       )}
     </Container>
+    
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Button sx={{ marginTop: "5px" }} variant="outlined" color="success"  disabled={loadingPreInscriptos} onClick={handleExport}>
+          Excel
+        </Button>
+      </div>
+    </>
   );
 };
 
