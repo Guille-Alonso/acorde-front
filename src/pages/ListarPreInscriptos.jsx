@@ -71,77 +71,78 @@ const ListarPreInscriptos = () => {
 
   return (
     <>
-    <Container
-      maxWidth={false}
-      sx={{ backgroundColor: "#9AB1BC", padding: "16px" }}
-    >
-      {!loadingPreInscriptos ? (
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                {columnas.map((columna, index) => (
-                  <TableCell key={index}>{columna}</TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {displayedData.map((inscripto, index) => (
-                <TableRow key={index}>
-                  <TableCell>
-                    {inscripto.nombre} {inscripto.apellido}
-                  </TableCell>
-                  {/* <TableCell>{inscripto.apellido}</TableCell> */}
-                  <TableCell>{inscripto.edad}</TableCell>
-                  <TableCell>{inscripto.numCel || "-"}</TableCell>
-                  <TableCell>
-                    {inscripto.nombrePadre} {inscripto.apellidoPadre}
-                  </TableCell>
-                  <TableCell>{inscripto.telefonoPadre}</TableCell>
-                  {/* <TableCell>{inscripto.apellidoPadre}</TableCell> */}
-                  <TableCell>{inscripto.emailPadre}</TableCell>
-                  <TableCell>{inscripto.nivel}</TableCell>
-                  <TableCell>{inscripto.clases.join(", ")}</TableCell>
-                  <TableCell>{inscripto.dias.join(", ")}</TableCell>
-                  <TableCell>
-                    {inscripto.participaMuestra ? "Sí" : "No"}
-                  </TableCell>
-                  <TableCell>{inscripto.estiloMusica || "-"}</TableCell>
-                  <TableCell>{inscripto.comentario || "-"}</TableCell>
-                  <TableCell>{inscripto.otroInstrumento || "-"}</TableCell>
+      <Container
+        maxWidth={false}
+        sx={{ backgroundColor: "#9AB1BC", padding: "16px" }}
+      >
+        {!loadingPreInscriptos ? (
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {columnas.map((columna, index) => (
+                    <TableCell key={index}>{columna}</TableCell>
+                  ))}
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          {/* Componente de paginación */}
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={preInscriptos.length} // Total de filas
-            rowsPerPage={rowsPerPage} // Filas por página
-            page={page} // Página actual
-            onPageChange={handleChangePage} // Cambio de página
-            onRowsPerPageChange={handleChangeRowsPerPage} // Cambio de filas por página
-            labelRowsPerPage="Filas por página:"
-            labelDisplayedRows={({ from, to, count }) =>
-              `${from}-${to} de ${count}`
-            }
-          />
-        </TableContainer>
-      ) : (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "96vh", // Ocupa todo el alto de la ventana
-          }}
-        >
-          <CircularProgress sx={{ color: "#DFA57C" }} />
-        </Box>
-      )}
-    </Container>
-    
+              </TableHead>
+              <TableBody>
+                {displayedData.map((inscripto, index) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      {`${inscripto.nombre} ${inscripto.apellido}`}
+                    </TableCell>
+
+                    {/* <TableCell>{inscripto.apellido}</TableCell> */}
+                    <TableCell>{inscripto.edad}</TableCell>
+                    <TableCell>{inscripto.numCel || "-"}</TableCell>
+                    <TableCell>
+                    {`${inscripto.nombrePadre} ${inscripto.apellidoPadre}`}
+                    </TableCell>
+                    <TableCell>{inscripto.telefonoPadre}</TableCell>
+                    {/* <TableCell>{inscripto.apellidoPadre}</TableCell> */}
+                    <TableCell>{inscripto.emailPadre}</TableCell>
+                    <TableCell>{inscripto.nivel}</TableCell>
+                    <TableCell>{inscripto.clases.join(", ")}</TableCell>
+                    <TableCell>{inscripto.dias.join(", ")}</TableCell>
+                    <TableCell>
+                      {inscripto.participaMuestra ? "Sí" : "No"}
+                    </TableCell>
+                    <TableCell>{inscripto.estiloMusica || "-"}</TableCell>
+                    <TableCell>{inscripto.comentario || "-"}</TableCell>
+                    <TableCell>{inscripto.otroInstrumento || "-"}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            {/* Componente de paginación */}
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={preInscriptos.length} // Total de filas
+              rowsPerPage={rowsPerPage} // Filas por página
+              page={page} // Página actual
+              onPageChange={handleChangePage} // Cambio de página
+              onRowsPerPageChange={handleChangeRowsPerPage} // Cambio de filas por página
+              labelRowsPerPage="Filas por página:"
+              labelDisplayedRows={({ from, to, count }) =>
+                `${from}-${to} de ${count}`
+              }
+            />
+          </TableContainer>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "96vh", // Ocupa todo el alto de la ventana
+            }}
+          >
+            <CircularProgress sx={{ color: "#DFA57C" }} />
+          </Box>
+        )}
+      </Container>
+
       <div
         style={{
           display: "flex",
@@ -149,7 +150,13 @@ const ListarPreInscriptos = () => {
           alignItems: "center",
         }}
       >
-        <Button sx={{ marginTop: "5px" }} variant="outlined" color="success"  disabled={loadingPreInscriptos} onClick={handleExport}>
+        <Button
+          sx={{ marginTop: "5px" }}
+          variant="outlined"
+          color="success"
+          disabled={loadingPreInscriptos}
+          onClick={handleExport}
+        >
           Excel
         </Button>
       </div>
