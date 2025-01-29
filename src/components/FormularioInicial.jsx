@@ -174,7 +174,7 @@ const nivelRef = useRef(null);
   // Estilos condicionales
   const imageStyleInicioForm = {
     borderRadius: '8px',
-    maxWidth: isSmallScreen ? '100%' : '60vw', // Ancho 100% en pantallas pequeñas, auto en otras
+    maxWidth: isSmallScreen ? '100%' : '40vw', // Ancho 100% en pantallas pequeñas, auto en otras
     maxHeight: isSmallScreen ? 'auto' : '60vh', // Ajusta la altura en pantallas pequeñas
   };
 
