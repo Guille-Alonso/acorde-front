@@ -13,5 +13,7 @@ export const PREINSCRIPCION_VALUES = {
     participaMuestra: false,
     estiloMusica: '',
     comentario: '',
-    otroInstrumento: ''
+    otroInstrumento: '',
+    disciplinas6a9: [],
+    disciplinas10a15: [],
   }

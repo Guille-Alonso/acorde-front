@@ -38,7 +38,7 @@ const Home = () => {
   return (
     <div style={containerStyle}>
       <img src={logoAcorde} alt="Centrada" style={imageStyle} />
-      <p className="masInfo">¿Querés mas info?</p>
+      {/* <p className="masInfo">¿Querés mas info?</p> */}
       <div style={containerStyleDivButton}>
         <ArrowForwardIcon fontSize='large' />
         <Button
@@ -48,7 +48,7 @@ const Home = () => {
           onClick={() => navigate("/formInicial")}
           variant="outlined"
         >
-          PRE-INSCRIBITE
+          HORARIOS Y PRECIOS
         </Button>
         <ArrowBackIcon fontSize='large' />
       </div>
