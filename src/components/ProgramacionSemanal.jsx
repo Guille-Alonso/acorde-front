@@ -1,122 +1,48 @@
-// import React from "react";
-// import { Grid, FormControlLabel, Checkbox, Typography, Box } from "@mui/material";
-
-// const ProgramacionSemanal = ({
-//   edad,
-//   formValues,
-//   handleCheckboxChangeDisciplinas6a9,
-//   handleCheckboxChangeDisciplinas10a15,
-// }) => {
-//   const horarios = [
-//     {
-//       rangoEdad: [6, 9],
-//       titulo: "6 a 9 años",
-//       dias: [
-//         { dia: "Lunes", horario: "18.30hs a 19.30hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
-//         { dia: "Martes", horario: "18.30hs a 19.30hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
-//         { dia: "Miércoles", horario: "18.30hs a 19.30hs", disciplinas: ["Guitarra", "Ukelele", "Canto", "Violín"] },
-//         { dia: "Jueves", horario: "18.30hs a 19.30hs", disciplinas: ["Piano", "Canto"] },
-//         { dia: "Viernes", horario: "18.30hs a 19.30hs", disciplinas: ["Canto", "Guitarra", "Percusión"] },
-//       ],
-//     },
-//     {
-//       rangoEdad: [10, 15],
-//       titulo: "10 a 15 años",
-//       dias: [
-//         { dia: "Lunes", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
-//         { dia: "Martes", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
-//         { dia: "Miércoles", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Ukelele", "Violín"] },
-//         { dia: "Jueves", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Piano", "Canto"] },
-//         { dia: "Viernes", horario: "20hs a 21hs", disciplinas: ["Canto", "Guitarra", "Percusión"] },
-//       ],
-//     },
-//   ];
-
-//   return (
-//     <Box sx={{ padding: 2 }}>
-//       <Typography variant="h5" align="center" gutterBottom>
-//         PROGRAMACIÓN SEMANAL
-//       </Typography>
-//       <Typography variant="body2" align="center" gutterBottom>
-//         (Se puede elegir una disciplina por día y hasta dos disciplinas semanales)
-//       </Typography>
-//       <Grid container spacing={4}>
-//         {horarios.map((grupo, index) => {
-//           const isHabilitado = edad >= grupo.rangoEdad[0] && edad <= grupo.rangoEdad[1];
-
-//           return (
-//             <Grid item xs={12} md={6} key={index}>
-//               <Typography variant="h6" align="center" color={isHabilitado ? "textPrimary" : "textSecondary"}>
-//                 (Edad {grupo.titulo})
-//               </Typography>
-//               {grupo.dias.map((dia, idx) => (
-//                 <Box key={idx} sx={{ marginBottom: 2 }}>
-//                   <Typography variant="subtitle1">
-//                     {dia.dia} {dia.horario}
-//                   </Typography>
-//                   {dia.disciplinas.map((disciplina, i) => (
-//                     <FormControlLabel
-//                       key={i}
-//                       control={
-//                         <Checkbox
-//                         checked={index === 0 ? formValues.disciplinas6a9.includes(`${dia.dia}-${disciplina}`) :formValues.disciplinas10a15.includes(`${dia.dia}-${disciplina}`) }
-//                           onChange={(e) =>
-//                             index === 0
-//                               ? handleCheckboxChangeDisciplinas6a9(e, dia.dia, disciplina)
-//                               : handleCheckboxChangeDisciplinas10a15(e, dia.dia, disciplina)
-//                           }
-//                           value={`${dia.dia}-${disciplina}`}
-//                           disabled={!isHabilitado} // Deshabilita si no corresponde a la edad
-//                         />
-//                       }
-//                       label={disciplina}
-//                     />
-//                   ))}
-//                 </Box>
-//               ))}
-//             </Grid>
-//           );
-//         })}
-//       </Grid>
-//     </Box>
-//   );
-// };
-
-// export default ProgramacionSemanal;
-
 import React from "react";
-import { Grid, FormControlLabel, Checkbox, Typography, Box } from "@mui/material";
+import { Grid, FormControlLabel, Checkbox, Typography, Box, FormHelperText, CircularProgress } from "@mui/material";
+import "./FormularioInicial.css"
+import useGet from "../hooks/useGet";
+import { axios } from "../config/axios";
 
 const ProgramacionSemanal = ({
   edad,
   formValues,
   handleCheckboxChangeDisciplinas6a9,
   handleCheckboxChangeDisciplinas10a15,
+  errors,disciplinasRef,focusedField,handleFocus
+
 }) => {
-  const horarios = [
-    {
-      rangoEdad: [6, 9],
-      titulo: "6 a 9 años",
-      dias: [
-        { dia: "Lunes", horario: "18.30hs a 19.30hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
-        { dia: "Martes", horario: "18.30hs a 19.30hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
-        { dia: "Miércoles", horario: "18.30hs a 19.30hs", disciplinas: ["Guitarra", "Ukelele", "Canto", "Violín"] },
-        { dia: "Jueves", horario: "18.30hs a 19.30hs", disciplinas: ["Piano", "Canto"] },
-        { dia: "Viernes", horario: "18.30hs a 19.30hs", disciplinas: ["Canto", "Guitarra", "Percusión"] },
-      ],
-    },
-    {
-      rangoEdad: [10, 15],
-      titulo: "10 a 15 años",
-      dias: [
-        { dia: "Lunes", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
-        { dia: "Martes", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
-        { dia: "Miércoles", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Ukelele", "Violín"] },
-        { dia: "Jueves", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Piano", "Canto"] },
-        { dia: "Viernes", horario: "20hs a 21hs", disciplinas: ["Canto", "Guitarra", "Percusión"] },
-      ],
-    },
-  ];
+  // const horarios = [
+  //   {
+  //     rangoEdad: [6, 9],
+  //     titulo: "6 a 9 años",
+  //     dias: [
+  //       { dia: "Lunes", horario: "18.30hs a 19.30hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
+  //       { dia: "Martes", horario: "18.30hs a 19.30hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
+  //       { dia: "Miércoles", horario: "18.30hs a 19.30hs", disciplinas: ["Guitarra", "Ukelele", "Canto", "Violín"] },
+  //       { dia: "Jueves", horario: "18.30hs a 19.30hs", disciplinas: ["Piano", "Canto"] },
+  //       { dia: "Viernes", horario: "18.30hs a 19.30hs", disciplinas: ["Canto", "Guitarra", "Percusión"] },
+  //     ],
+  //   },
+  //   {
+  //     rangoEdad: [10, 15],
+  //     titulo: "10 a 15 años",
+  //     dias: [
+  //       { dia: "Lunes", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
+  //       { dia: "Martes", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Ukelele", "Piano", "Canto"] },
+  //       { dia: "Miércoles", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Ukelele", "Violín"] },
+  //       { dia: "Jueves", horario: "20hs a 21hs", disciplinas: ["Guitarra", "Piano", "Canto"] },
+  //       { dia: "Viernes", horario: "20hs a 21hs", disciplinas: ["Canto", "Guitarra", "Percusión"] },
+  //     ],
+  //   },
+  // ];
+
+  const [
+    { horarios },
+    loadingHorarios,
+    getHorarios,
+    setHorarios,
+  ] = useGet("/formularios/horarios", axios);
 
   // Función para validar si se permite seleccionar más disciplinas
   const canSelectDiscipline6a9 = (grupoIndex, dia, disciplina) => {
@@ -151,61 +77,137 @@ const ProgramacionSemanal = ({
     return true;
   };
 
+
+
   return (
     <Box sx={{ padding: 2 }}>
       <Typography variant="h5" align="center" gutterBottom>
         PROGRAMACIÓN SEMANAL
       </Typography>
       <Typography variant="body2" align="center" gutterBottom>
-        (Se puede elegir una disciplina por día y hasta dos disciplinas semanales)
+        (Se puede elegir una disciplina por día y hasta dos disciplinas
+        semanales)
       </Typography>
-      <Grid container spacing={4}>
-        {horarios.map((grupo, grupoIndex) => {
-          const isHabilitado = edad >= grupo.rangoEdad[0] && edad <= grupo.rangoEdad[1];
- 
-          return (
-            <Grid item xs={12} md={6} key={grupoIndex}>
-              <Typography variant="h6" align="center" color={isHabilitado ? "textPrimary" : "textSecondary"}>
-                (Edad {grupo.titulo})
-              </Typography>
-              {grupo.dias.map((dia, idx) => (
-                <Box key={idx} sx={{ marginBottom: 2 }}>
-                  <Typography variant="subtitle1">
-                    {dia.dia} {dia.horario}
+      {!loadingHorarios ? (
+        <Grid container spacing={4}>
+          {!loadingHorarios &&
+            horarios.map((grupo, grupoIndex) => {
+              const isHabilitado =
+                edad >= grupo.rangoEdad[0] && edad <= grupo.rangoEdad[1];
+
+              return (
+                <Grid item xs={12} md={6} key={grupoIndex}>
+                  <Typography
+                    sx={{
+                      marginBottom: { md: 2 },
+                      marginTop: {
+                        xs: grupo.titulo == "6 a 9 años" ? 2 : 0,
+                        md: 3,
+                      },
+                    }}
+                    variant="h6"
+                    align="center"
+                    color={isHabilitado ? "textPrimary" : "textSecondary"}
+                  >
+                    (Edad {grupo.titulo})
                   </Typography>
-                  {dia.disciplinas.map((disciplina, i) => (
-                    <FormControlLabel
-                      key={i}
-                      control={
-                        <Checkbox
-                        checked={grupoIndex === 0 ? formValues.disciplinas6a9.includes(`${dia.dia}-${disciplina}`) :formValues.disciplinas10a15.includes(`${dia.dia}-${disciplina}`) }
-                          onChange={(e) =>
-                            grupoIndex === 0
-                              ? handleCheckboxChangeDisciplinas6a9(e, dia.dia, disciplina)
-                              : handleCheckboxChangeDisciplinas10a15(e, dia.dia, disciplina)
+                  {grupo.dias.map((dia, idx) => (
+                    <Box key={idx} sx={{ marginBottom: 2 }}>
+                      <Typography variant="subtitle1">
+                        {dia.dia} {dia.horario}
+                      </Typography>
+                      {dia.disciplinas.map(( disciplina , i) => (
+                        <FormControlLabel
+                          onFocus={() => handleFocus("disciplinas6a9")}
+                          error={!!errors.disciplinas}
+                          sx={{
+                            "& .MuiFormLabel-root.Mui-focused": {
+                              color:
+                                focusedField === "dias" ? "#9AB1BC" : undefined,
+                            },
+                            "& .MuiOutlinedInput-root.Mui-focused": {
+                              "& fieldset": {
+                                borderColor: "#DFA57C", // Color que toma el campo en foco
+                              },
+                            },
+                            "& .MuiCheckbox-root.Mui-checked": {
+                              color: "#DFA57C", // Cambia el color cuando está marcado
+                            },
+                            "& .MuiFormLabel-root:not(.Mui-focused)": {
+                              color: "#DFA57C", // Color que se mantiene cuando pierde el foco
+                            },
+                          }}
+                          key={i}
+                          control={
+                            <Checkbox
+                              inputRef={disciplinasRef}
+                              checked={
+                                grupoIndex === 0
+                                  ? formValues.disciplinas6a9.includes(
+                                      `${dia.dia}-${disciplina.disciplina}`
+                                    )
+                                  : formValues.disciplinas10a15.includes(
+                                      `${dia.dia}-${disciplina.disciplina}`
+                                    )
+                              }
+                              onChange={(e) =>
+                                grupoIndex === 0
+                                  ? handleCheckboxChangeDisciplinas6a9(
+                                      e,
+                                      dia.dia,
+                                      disciplina.disciplina, disciplina
+                                    )
+                                  : handleCheckboxChangeDisciplinas10a15(
+                                      e,
+                                      dia.dia,
+                                      disciplina.disciplina, disciplina
+                                    )
+                              }
+                              value={`${dia.dia}-${disciplina.disciplina}`}
+                              disabled={
+                                !isHabilitado ||
+                                (grupoIndex === 0
+                                  ? !canSelectDiscipline6a9(
+                                      grupoIndex,
+                                      dia.dia,
+                                      disciplina.disciplina
+                                    )
+                                  : !canSelectDiscipline10a15(
+                                      grupoIndex,
+                                      dia.dia,
+                                      disciplina.disciplina
+                                    ))
+                              } // Deshabilita según las reglas
+                            />
                           }
-                          value={`${dia.dia}-${disciplina}`}
-                          disabled={
-                            !isHabilitado || (grupoIndex === 0 ? !canSelectDiscipline6a9(grupoIndex, dia.dia, disciplina) : !canSelectDiscipline10a15(grupoIndex, dia.dia, disciplina))
-                          } // Deshabilita según las reglas
+                          label={disciplina.disciplina}
                         />
-                      }
-                      label={disciplina}
-                    />
+                      ))}
+                    </Box>
                   ))}
-                </Box>
-              ))}
-            </Grid>
-          );
-        })}
-      </Grid>
+                </Grid>
+              );
+            })}
+        </Grid>
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: {xs:"center",md:"end"},
+            alignItems: "center",
+            height: "20vh", // Ocupa todo el alto de la ventana
+          }}
+        >
+          <CircularProgress sx={{ color: "#DFA57C" }} />
+        </Box>
+      )}
+      {errors.disciplinas &&
+        formValues.disciplinas6a9.length == 0 &&
+        formValues.disciplinas10a15.length == 0 && (
+          <FormHelperText>{errors.disciplinas}</FormHelperText>
+        )}
     </Box>
   );
 };
 
 export default ProgramacionSemanal;
-
-
-
-
-// checked={index === 0 ? formValues.disciplinas6a9.includes(`${dia.dia}-${disciplina}`) :formValues.disciplinas10a15.includes(`${dia.dia}-${disciplina}`) }

@@ -28,12 +28,12 @@ import cantora from "../assets/cantoraRec.jpg"
 import pibeOk from "../assets/pibeOk.jpg"
 import "./FormularioInicial.css"
 import { axios } from '../config/axios';
-import { PREINSCRIPCION_VALUES } from '../helpers';
+import { INSCRIPCION_VALUES, PREINSCRIPCION_VALUES } from '../helpers';
 import { useNavigate } from 'react-router-dom';
 import ProgramacionSemanal from './ProgramacionSemanal';
 
 const Inscripcion = () => {
-  const [formValues, setFormValues] = useState(PREINSCRIPCION_VALUES);
+  const [formValues, setFormValues] = useState(INSCRIPCION_VALUES);
 
 const [errors, setErrors] = useState({});
 const [focusedField, setFocusedField] = useState('');
@@ -41,10 +41,20 @@ const [focusedField, setFocusedField] = useState('');
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     // validate();
+    // setFormValues({
+    //   ...formValues,
+    //   [name]: type === 'checkbox' ? checked : value,
+    // });
+
     setFormValues({
       ...formValues,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
+      disciplinas6a9: name === "edad" ? [] : formValues.disciplinas6a9,
+      disciplinas10a15: name === "edad" ? [] : formValues.disciplinas10a15,
+      idDisciplina: name === "edad" ? [] : formValues.idDisciplina
     });
+    
+    
   };
 
 const handleFocus = (name) => {
@@ -62,9 +72,7 @@ const apellidoPadreRef = useRef(null);
 const telefonoPadreRef = useRef(null);
 const emailPadreRef = useRef(null);
 
-const clasesRef = useRef(null);
-const diasRef = useRef(null);
-const nivelRef = useRef(null);
+const disciplinasRef = useRef(null);
 
   const validate = () => {
     const newErrors = {};
@@ -105,26 +113,10 @@ const nivelRef = useRef(null);
       if (emailPadreRef.current) emailPadreRef.current.focus();
     } 
 
-    if (!formValues.nivel){
-      newErrors.nivel = 'Seleccione un nivel de aprendizaje';
-      if (nivelRef.current) nivelRef.current.focus();
-    }
-
-    if (formValues.clases.length == 0){
-      newErrors.clases = 'Seleccione al menos una clase';
-      if (clasesRef.current) clasesRef.current.focus();
+    if (formValues.disciplinas6a9.length == 0 && formValues.disciplinas10a15.length == 0){
+      newErrors.disciplinas = 'Debe ingresar al menos una clase de los grupos establecidos.';
+      if (disciplinasRef.current) disciplinasRef.current.focus();
     } 
-
-    if (formValues.dias.length == 0){
-      newErrors.dias = 'Seleccione al menos un día';
-      if (diasRef.current) diasRef.current.focus();
-    } 
-
-    if (formValues.clases.includes("Otro") && !formValues.otroInstrumento) {
-      newErrors.otroInstrumento = 'Debe ingresar un instrumento';
-      if (otroRef.current) otroRef.current.focus();
-    }
-      
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -141,15 +133,15 @@ const nivelRef = useRef(null);
       if (validate()) {
         console.log('Formulario válido:', formValues);
         // alert('Formulario enviado correctamente');
-        const {data} = await axios.post("formularios/preInscripcion",formValues)
-        // console.log(data);
-        setNotificacion({mensaje:"¡Preinscripción exitosa!", tipo:"success"})
-        handleOpenNotify();
-        setFormValues(PREINSCRIPCION_VALUES);
+        // const {data} = await axios.post("formularios/inscripcion",formValues)
+        // // console.log(data);
+        // setNotificacion({mensaje:"¡Preinscripción exitosa!", tipo:"success"})
+        // handleOpenNotify();
+        // setFormValues(INSCRIPCION_VALUES);
         
-        setTimeout(() => {
-           navigate("/preinscripcionExitosa")
-        }, 3000);
+        // setTimeout(() => {
+        //    navigate("/preinscripcionExitosa")
+        // }, 3000);
        
       } else {
         console.log('Errores en el formulario:', errors);
@@ -242,39 +234,42 @@ const nivelRef = useRef(null);
     setOpen(false); // Cerrar la alerta
   };
 
-//   const [formValues2, setFormValues2] = React.useState({
-//     disciplinas: [],
-//   });
-
-  const handleCheckboxChangeDisciplinas6a9 = (event, dia, disciplina) => {
+  const handleCheckboxChangeDisciplinas6a9 = (event, dia, disciplina,obj) => {
+    
     const value = `${dia}-${disciplina}`;
     setFormValues((prevValues) => {
-      const { disciplinas6a9 } = prevValues;
+      const { disciplinas6a9,idDisciplina } = prevValues;
+      // const { disciplinas6a9 } = prevValues;
       if (event.target.checked) {
         // Si está seleccionado, agregar la disciplina
-        return { ...prevValues, disciplinas6a9: [...disciplinas6a9, value] };
+        return { ...prevValues, disciplinas6a9: [...disciplinas6a9, value],  idDisciplina: [...idDisciplina, obj._id]};
+        // return { ...prevValues, disciplinas6a9: [...disciplinas6a9, value]};
       } else {
         // Si está deseleccionado, quitar la disciplina
         return {
           ...prevValues,
           disciplinas6a9: disciplinas6a9.filter((item) => item !== value),
+          idDisciplina: idDisciplina.filter((item) => item !== obj._id)
         };
       }
     });
   };
 
-  const handleCheckboxChangeDisciplinas10a15 = (event, dia, disciplina) => {
+  const handleCheckboxChangeDisciplinas10a15 = (event, dia, disciplina,obj) => {
+  
     const value = `${dia}-${disciplina}`;
     setFormValues((prevValues) => {
-      const { disciplinas10a15 } = prevValues;
+      const { disciplinas10a15, idDisciplina } = prevValues;
       if (event.target.checked) {
         // Si está seleccionado, agregar la disciplina
-        return { ...prevValues, disciplinas10a15: [...disciplinas10a15, value] };
+        // return { ...prevValues,  disciplinas10a15: [...disciplinas10a15, value] };
+        return { ...prevValues, disciplinas10a15: [...disciplinas10a15, value],  idDisciplina: [...idDisciplina, obj._id]};
       } else {
         // Si está deseleccionado, quitar la disciplina
         return {
           ...prevValues,
           disciplinas10a15: disciplinas10a15.filter((item) => item !== value),
+          idDisciplina: idDisciplina.filter((item) => item !== obj._id)
         };
       }
     });
@@ -293,17 +288,34 @@ const nivelRef = useRef(null);
         }}
       >
         <Grid container style={containerStyle}>
-          <img src={niñopianocortado} alt="Centrada" style={imageStyleInicioForm}/>
+          <img
+            src={niñopianocortado}
+            alt="Centrada"
+            style={imageStyleInicioForm}
+          />
           <StepLabel sx={{ textAlign: "justify", marginTop: 1 }}>
-            Hola! Les compartimos la programación de las clases para la academia de ACORDE 2025. Los datos que nos brindes, ayudarán a diagramar las clases y grupos de una mejor manera. Desde ya, muchas gracias!. <br/> <br/>
-            -Las Clases se dictarán en Juan XXII 79 - Yerba Buena (Centro Markay).<br/>
-            -Las Clases serán de 1 hs. de duración: <br/>
-            (De 6 a 9 años serán de 18:30hs a 19:30hs)<br/>
-            (De 10 a 15 años serán de 20hs a 21hs)<br/><br/>
-            -El valor de la cuota es de $35.000 asistiendo una vez por semana. <br/>
-            (En caso de elegir dos disciplinas (por ejemplo canto y piano) la cuota <br/>
-            es de $55.000 asistiendo 2 veces por semana).<br/><br/>
-            -Los grupos serán con cupo de hasta 8 alumnos. Los lugares se irán completando según el orden de confirmación y de pago de la cuota.
+            Hola! Les compartimos la programación de las clases para la academia
+            de ACORDE 2025. Los datos que nos brindes, ayudarán a diagramar las
+            clases y grupos de una mejor manera. Desde ya, muchas gracias!.{" "}
+            <br /> <br />
+            -Las Clases se dictarán en Juan XXII 79 - Yerba Buena (Centro
+            Markay).
+            <br />
+            -Las Clases serán de 1 hs. de duración: <br />
+            (De 6 a 9 años serán de 18:30hs a 19:30hs)
+            <br />
+            (De 10 a 15 años serán de 20hs a 21hs)
+            <br />
+            <br />
+            -El valor de la cuota es de $35.000 asistiendo una vez por semana.{" "}
+            <br />
+            (En caso de elegir dos disciplinas (por ejemplo canto y piano) la
+            cuota <br />
+            es de $55.000 asistiendo 2 veces por semana).
+            <br />
+            <br />
+            -Los grupos serán con cupo de hasta 10 alumnos. Los lugares se irán
+            completando según el orden de confirmación y de pago de la cuota.
           </StepLabel>
         </Grid>
         <form onSubmit={handleSubmit}>
@@ -314,7 +326,7 @@ const nivelRef = useRef(null);
             <Grid container columnSpacing={2}>
               <Grid item xs={12} md={6}>
                 <TextField
-                 inputRef={nombreAlumnoRef}
+                  inputRef={nombreAlumnoRef}
                   label="Nombre"
                   name="nombre"
                   value={formValues.nombre}
@@ -386,7 +398,7 @@ const nivelRef = useRef(null);
 
               <Grid item xs={12} md={6}>
                 <TextField
-                 inputRef={edadAlumnoRef}
+                  inputRef={edadAlumnoRef}
                   label="Edad"
                   name="edad"
                   type="text"
@@ -603,118 +615,27 @@ const nivelRef = useRef(null);
                 <img src={luchaCanta} alt="Centrada" style={imageStylePibeOK} />
               </Grid>
             </Grid>
+{
+  Array.isArray(formValues.disciplinas6a9) && Array.isArray(formValues.disciplinas10a15) &&
+            <ProgramacionSemanal
+              formValues={formValues}
+              handleCheckboxChangeDisciplinas6a9={
+                handleCheckboxChangeDisciplinas6a9
+              }
+              handleCheckboxChangeDisciplinas10a15={
+                handleCheckboxChangeDisciplinas10a15
+              }
+              edad={formValues.edad}
+              disciplinasRef={disciplinasRef}
+              errors={errors}
+              focusedField={focusedField}
+              handleFocus={handleFocus}
+            />
+}
 
-                      <ProgramacionSemanal
-                          formValues={formValues}
-                          handleCheckboxChangeDisciplinas6a9={handleCheckboxChangeDisciplinas6a9}
-                          handleCheckboxChangeDisciplinas10a15={handleCheckboxChangeDisciplinas10a15}
-                          edad={formValues.edad}
-                      />
-
-            <Grid item xs={12}>
-              <FormControl
-                component="fieldset"
-                margin="normal"
-                fullWidth
-                onFocus={() => handleFocus("nivel")}
-                error={!!errors.nivel}
-                sx={{
-                  "& .MuiFormLabel-root.Mui-focused": {
-                    color: focusedField === "nivel" ? "#9AB1BC" : undefined,
-                  },
-                  "& .MuiOutlinedInput-root.Mui-focused": {
-                    "& fieldset": {
-                      borderColor: "#9AB1BC", // Color que toma el campo en foco
-                    },
-                  },
-                  "& .MuiRadio-root.Mui-checked": {
-                    color: "#9AB1BC", // Cambia el color cuando está marcado
-                  },
-                  "& .MuiFormLabel-root:not(.Mui-focused)": {
-                    color: "#9AB1BC", // Color que se mantiene cuando pierde el foco
-                  },
-                }}
-              >
-                <FormLabel component="legend">
-                  ¿En qué nivel de aprendizaje crees que te encuentras?
-                </FormLabel>
-                <RadioGroup
-                  name="nivel"
-                  value={formValues.nivel}
-                  onChange={handleChange}
-                  
-                >
-                  <FormControlLabel
-                   inputRef={nivelRef}
-                    value="iniciacion"
-                    control={<Radio />}
-                    label="Iniciación"
-                  />
-                  <FormControlLabel
-                    value="medio"
-                    control={<Radio />}
-                    label="Medio"
-                  />
-                  <FormControlLabel
-                    value="avanzado"
-                    control={<Radio />}
-                    label="Avanzado"
-                  />
-                </RadioGroup>
-                {/* Este componente mostrará el mensaje de error */}
-                {errors.nivel && !formValues.nivel && (
-                  <FormHelperText>{errors.nivel}</FormHelperText>
-                )}
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12} md={6} marginTop={2.5}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name="participaMuestra"
-                    checked={formValues.participaMuestra}
-                    onChange={handleChange}
-                    sx={{
-                      "&.Mui-checked": {
-                        color: "#9AB1BC", // Cambia el color del checkbox cuando está marcado
-                      },
-                    }}
-                  />
-                }
-                label="¿Te gustaría participar de las muestras
-y shows abiertos al público?
-"
-              />
-            </Grid>
+            
 
             <Grid item xs={12} md={12}>
-              <TextField
-                label="Estilo de música preferido"
-                name="estiloMusica"
-                value={formValues.estiloMusica}
-                onFocus={() => handleFocus("estiloMusica")}
-                onChange={handleChange}
-                margin="normal"
-                fullWidth
-                inputProps={{ maxLength: 80 }}
-                sx={{
-                  "& .MuiInputLabel-root": {
-                    "&.Mui-focused, &.MuiInputLabel-shrink": {
-                      color: "#9AB1BC",
-                    },
-                  },
-                  "& .MuiOutlinedInput-root": {
-                    "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
-                      {
-                        "& fieldset": {
-                          borderColor: "#9AB1BC",
-                        },
-                      },
-                  },
-                }}
-              />
-
               <TextField
                 label="Alguna pregunta o comentario"
                 name="comentario"
@@ -771,11 +692,14 @@ y shows abiertos al público?
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }} // Posición de la alerta
       >
-        <Alert onClose={handleClose} severity={notificacion.tipo} sx={{ width: "100%" }}>
+        <Alert
+          onClose={handleClose}
+          severity={notificacion.tipo}
+          sx={{ width: "100%" }}
+        >
           {notificacion.mensaje}
         </Alert>
       </Snackbar>
-
     </div>
   );
 };
