@@ -40,11 +40,6 @@ const [focusedField, setFocusedField] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    // validate();
-    // setFormValues({
-    //   ...formValues,
-    //   [name]: type === 'checkbox' ? checked : value,
-    // });
 
     setFormValues({
       ...formValues,
@@ -53,7 +48,6 @@ const [focusedField, setFocusedField] = useState('');
       disciplinas10a15: name === "edad" ? [] : formValues.disciplinas10a15,
       idDisciplina: name === "edad" ? [] : formValues.idDisciplina
     });
-    
     
   };
 
@@ -131,17 +125,17 @@ const disciplinasRef = useRef(null);
     e.preventDefault();
     try {
       if (validate()) {
-        console.log('Formulario válido:', formValues);
+        // console.log('Formulario válido:', formValues);
         // alert('Formulario enviado correctamente');
-        // const {data} = await axios.post("formularios/inscripcion",formValues)
-        // // console.log(data);
-        // setNotificacion({mensaje:"¡Preinscripción exitosa!", tipo:"success"})
-        // handleOpenNotify();
-        // setFormValues(INSCRIPCION_VALUES);
-        
-        // setTimeout(() => {
-        //    navigate("/preinscripcionExitosa")
-        // }, 3000);
+        const {data} = await axios.post("formularios/inscripcion",formValues)
+        // console.log(data);
+        setNotificacion({mensaje:"¡Inscripción exitosa!", tipo:"success"})
+        handleOpenNotify();
+        setFormValues(INSCRIPCION_VALUES);
+        localStorage.setItem("monto",formValues.disciplinas6a9.length == 1 || formValues.disciplinas10a15.length == 1 ? "$35.000" : "$55.000" )
+        setTimeout(() => {
+           navigate("/preinscripcionExitosa")
+        }, 3000);
        
       } else {
         console.log('Errores en el formulario:', errors);
