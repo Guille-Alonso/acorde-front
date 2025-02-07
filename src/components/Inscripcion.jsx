@@ -289,9 +289,8 @@ const disciplinasRef = useRef(null);
           />
           <StepLabel sx={{ textAlign: "justify", marginTop: 1 }}>
             Hola! Les compartimos la programación de las clases para la academia
-            de ACORDE 2025. Los datos que nos brindes, ayudarán a diagramar las
-            clases y grupos de una mejor manera. Desde ya, muchas gracias!.{" "}
-            <br /> <br />
+            de ACORDE 2025, y los siguientes datos para tener en cuenta: <br />{" "}
+            <br />
             -Las Clases se dictarán en Juan XXII 79 - Yerba Buena (Centro
             Markay).
             <br />
@@ -609,25 +608,32 @@ const disciplinasRef = useRef(null);
                 <img src={luchaCanta} alt="Centrada" style={imageStylePibeOK} />
               </Grid>
             </Grid>
-{
-  Array.isArray(formValues.disciplinas6a9) && Array.isArray(formValues.disciplinas10a15) &&
-            <ProgramacionSemanal
-              formValues={formValues}
-              handleCheckboxChangeDisciplinas6a9={
-                handleCheckboxChangeDisciplinas6a9
-              }
-              handleCheckboxChangeDisciplinas10a15={
-                handleCheckboxChangeDisciplinas10a15
-              }
-              edad={formValues.edad}
-              disciplinasRef={disciplinasRef}
-              errors={errors}
-              focusedField={focusedField}
-              handleFocus={handleFocus}
-            />
-}
+            {Array.isArray(formValues.disciplinas6a9) &&
+              Array.isArray(formValues.disciplinas10a15) && (
+                <ProgramacionSemanal
+                  formValues={formValues}
+                  handleCheckboxChangeDisciplinas6a9={
+                    handleCheckboxChangeDisciplinas6a9
+                  }
+                  handleCheckboxChangeDisciplinas10a15={
+                    handleCheckboxChangeDisciplinas10a15
+                  }
+                  edad={formValues.edad}
+                  disciplinasRef={disciplinasRef}
+                  errors={errors}
+                  focusedField={focusedField}
+                  handleFocus={handleFocus}
+                />
+              )}
 
-            
+            <StepLabel sx={{ textAlign: "justify", marginTop: 1 }}>
+              La cuota debe abonarse del 1 al 10 de cada mes, transfiriendo al
+              alias <strong>Acorde2025.mp</strong>
+              <br /><br />
+              Enviar comprobante por correo a{" "}
+              <strong>acorde.yb@gmail.com</strong> para confirmar su
+              Inscripción.
+            </StepLabel>
 
             <Grid item xs={12} md={12}>
               <TextField
