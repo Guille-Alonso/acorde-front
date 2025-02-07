@@ -81,8 +81,8 @@ const disciplinasRef = useRef(null);
       if (apellidoAlumnoRef.current) apellidoAlumnoRef.current.focus();
     }
 
-    if (!formValues.edad || isNaN(formValues.edad) || !Number(formValues.edad) > 0 || Number(formValues.edad) < 6 || formValues.edad < 6){
-      newErrors.edad = 'Debe tener como mínimo 6 años';
+    if (!formValues.edad || isNaN(formValues.edad) || !Number(formValues.edad) > 0 || Number(formValues.edad) < 6 || formValues.edad < 6 || formValues.edad > 15){
+      newErrors.edad = 'Debe tener entre 6 y 15 años';
       if (edadAlumnoRef.current) edadAlumnoRef.current.focus();
     }
 
@@ -303,8 +303,7 @@ const disciplinasRef = useRef(null);
             -El valor de la cuota es de $35.000 asistiendo una vez por semana.{" "}
             <br />
             (En caso de elegir dos disciplinas (por ejemplo canto y piano) la
-            cuota <br />
-            es de $55.000 asistiendo 2 veces por semana).
+            cuota es de $55.000 asistiendo 2 veces por semana).
             <br />
             <br />
             -Los grupos serán con cupo de hasta 10 alumnos. Los lugares se irán
