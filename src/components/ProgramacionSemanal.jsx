@@ -81,7 +81,7 @@ const ProgramacionSemanal = ({
 
   return (
     <Box sx={{ padding: 2 }}>
-      <Typography variant="h5" align="center" gutterBottom>
+      <Typography sx={{ color: '#DFA57C' }} variant="h5" align="center" gutterBottom>
         PROGRAMACIÓN SEMANAL
       </Typography>
       <Typography variant="body2" align="center" gutterBottom>
@@ -176,7 +176,7 @@ const ProgramacionSemanal = ({
                                       grupoIndex,
                                       dia.dia,
                                       disciplina.disciplina
-                                    ))
+                                    )) || disciplina.disciplina == "Percusión"
                               } // Deshabilita según las reglas
                             />
                           }

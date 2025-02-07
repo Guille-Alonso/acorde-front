@@ -626,7 +626,7 @@ const disciplinasRef = useRef(null);
                 />
               )}
 
-            <StepLabel sx={{ textAlign: "justify", marginTop: 1 }}>
+            <StepLabel sx={{ textAlign: "justify"}}>
               La cuota debe abonarse del 1 al 10 de cada mes, transfiriendo al
               alias <strong>Acorde2025.mp</strong>
               <br /><br />
