@@ -104,6 +104,7 @@ const ProgramacionSemanal = ({
                         xs: grupo.titulo == "6 a 9 años" ? 2 : 0,
                         md: 3,
                       },
+                      color: "#9AB1BC"
                     }}
                     variant="h6"
                     align="center"
@@ -114,7 +115,7 @@ const ProgramacionSemanal = ({
                   {grupo.dias.map((dia, idx) => (
                     <Box key={idx} sx={{ marginBottom: 2 }}>
                       <Typography variant="subtitle1">
-                        {dia.dia} {dia.horario}
+                        {dia.dia.toUpperCase()} {dia.horario}
                       </Typography>
                       {dia.disciplinas.map(( disciplina , i) => (
                         <FormControlLabel

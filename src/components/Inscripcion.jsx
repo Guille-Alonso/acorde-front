@@ -19,6 +19,7 @@ import {
   Snackbar,
   Alert,
   useMediaQuery,
+  Typography,
 } from '@mui/material';
 import nenaInicio from "../assets/inicioForm.jpg"
 import niñopianocortado from "../assets/niñopianocortado.jpg"
@@ -288,25 +289,24 @@ const disciplinasRef = useRef(null);
             style={imageStyleInicioForm}
           />
           <StepLabel sx={{ textAlign: "justify", marginTop: 1 }}>
-            Hola! Les compartimos la programación de las clases para la academia
-            de ACORDE 2025, y los siguientes datos para tener en cuenta: <br />{" "}
+            <Typography sx={{ color: "#9AB1BC" }}>Hola! Les compartimos la programación de las clases para la academia
+            de ACORDE 2025, y los siguientes datos para tener en cuenta:</Typography> <br />{" "}
             <br />
-            -Las Clases se dictarán en Juan XXII 79 - Yerba Buena (Centro
-            Markay).
+            ➡Las Clases se dictarán en Juan XXII 79 - Yerba Buena (Centro Markay).
+            <br /><br />
+            ➡Las Clases serán de 1 hs. de duración: <br />
+            (De 6 a 9 años serán de <strong>18:30hs a 19:30hs</strong>)
             <br />
-            -Las Clases serán de 1 hs. de duración: <br />
-            (De 6 a 9 años serán de 18:30hs a 19:30hs)
-            <br />
-            (De 10 a 15 años serán de 20hs a 21hs)
+            (De 10 a 15 años serán de <strong>20hs a 21hs</strong>)
             <br />
             <br />
-            -El valor de la cuota es de $35.000 asistiendo una vez por semana.{" "}
+            ➡El valor de la cuota es de <strong>$35.000</strong> asistiendo una vez por semana.{" "}
             <br />
             (En caso de elegir dos disciplinas (por ejemplo canto y piano) la
-            cuota es de $55.000 asistiendo 2 veces por semana).
+            cuota es de <strong>$55.000</strong> asistiendo 2 veces por semana).
             <br />
             <br />
-            -Los grupos serán con cupo de hasta 10 alumnos. Los lugares se irán
+            ➡Los grupos serán con cupo de hasta 10 alumnos. Los lugares se irán
             completando según el orden de confirmación y de pago de la cuota.
           </StepLabel>
         </Grid>
@@ -626,12 +626,14 @@ const disciplinasRef = useRef(null);
               )}
 
             <StepLabel sx={{ textAlign: "justify"}}>
-              La cuota debe abonarse del 1 al 10 de cada mes, transfiriendo al
+              ➡La cuota debe abonarse del 1 al 10 de cada mes, transfiriendo al
               alias <strong>Acorde2025.mp</strong>
               <br /><br />
-              Enviar comprobante por correo a{" "}
+              ➡Enviar comprobante por correo a{" "}
               <strong>acorde.yb@gmail.com</strong> para confirmar su
               Inscripción.
+              <br /><br />
+              ➡El alumno queda inscripto una vez realizado el pago. (La cuota abonada será la de Marzo).
             </StepLabel>
 
             <Grid item xs={12} md={12}>
