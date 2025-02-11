@@ -4,6 +4,7 @@ import FormularioInicial from './components/FormularioInicial'
 import PreInscripcionExitosa from './pages/PreInscripcionExitosa'
 import ListarPreInscriptos from './pages/ListarPreInscriptos'
 import Inscripcion from './components/Inscripcion'
+import ListarInscriptos from './pages/ListarInscriptos'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
             <Route exact path="/formInicial" element={<Inscripcion/>} />
             <Route exact path="/preinscripcionExitosa" element={<PreInscripcionExitosa/>} />
             <Route exact path="/listarPreInscriptos" element={<ListarPreInscriptos/>} />
+            <Route exact path="/listarInscriptos" element={<ListarInscriptos/>} />
           {/* </Route> */}
             {/* <Route exact path="/consultaPadronGeneral" element={<ConsultaPadron/>} /> */}
         </Routes>
