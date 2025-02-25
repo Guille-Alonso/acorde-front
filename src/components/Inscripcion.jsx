@@ -295,7 +295,7 @@ const disciplinasRef = useRef(null);
               cuenta:
             </Typography>{" "}
             <br /> <br />
-            ➡Las Clases se dictarán en Juan XXII 79 - Yerba Buena (Centro
+            ➡Las Clases se dictarán en Juan XXIII 79 - Yerba Buena (Centro
             Markay).
             <br />
             <br />
