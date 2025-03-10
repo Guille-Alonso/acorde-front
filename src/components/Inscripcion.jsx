@@ -295,14 +295,14 @@ const disciplinasRef = useRef(null);
               cuenta:
             </Typography>{" "}
             <br /> <br />
-            ➡Las Clases se dictarán en Juan XXIII 79 - Yerba Buena (Centro
+            ➡Las Clases se dictan en Juan XXIII 79 - Yerba Buena (Centro
             Markay).
             <br />
             <br />
-            ➡Las Clases serán de 1 hs. de duración: <br />
-            (De 6 a 9 años serán de <strong>18:30hs a 19:30hs</strong>)
+            ➡Las Clases son de 1 hs. de duración: <br />
+            (De 6 a 9 años el horario es de <strong>18:30hs a 19:30hs</strong>)
             <br />
-            (De 10 a 15 años serán de <strong>20hs a 21hs</strong>)
+            (De 10 a 15 años el horario es de <strong>20hs a 21hs</strong>)
             <br />
             <br />
             ➡El valor de la cuota es de <strong>$35.000</strong> asistiendo una
@@ -311,7 +311,7 @@ const disciplinasRef = useRef(null);
             cuota es de <strong>$55.000</strong> asistiendo 2 veces por semana).
             <br />
             <br />
-            ➡Los grupos serán con cupo de hasta 10 alumnos. Los lugares se irán
+            ➡Los grupos son con cupo de hasta 10 alumnos. Los lugares se van
             completando según el orden de confirmación y de pago de la cuota.
           </StepLabel>
         </Grid>
@@ -640,8 +640,8 @@ const disciplinasRef = useRef(null);
               <br />
               ➡Enviar comprobante por correo a <strong>acorde.yb@gmail.com</strong>
               <br />
-              <br />
-              ➡<strong>El pago de Marzo lo estamos solicitando ahora, para confirmar la inscripción.</strong>
+              {/* <br />
+              ➡<strong>El pago de Marzo lo estamos solicitando ahora, para confirmar la inscripción.</strong> */}
             </StepLabel>
 
             <Grid item xs={12} md={12}>
