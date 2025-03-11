@@ -207,7 +207,7 @@ const ProgramacionSemanal = ({
                                           dia.dia,
                                           disciplina.disciplina
                                         )) ||
-                                    disciplina.disciplina == "Percusión"
+                                    disciplina.disciplina == "Percusión" || (disciplina.disciplina == "Canto" && dia.dia == "Viernes")
                                   } // Deshabilita según las reglas
                                 />
                               }
