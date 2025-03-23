@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { exportToExcel } from "../utils/exportarExcel";
 import { obtenerHoraArgentina } from "../utils/obtenerFechaYHoraActual";
+import FiltroInscriptos from "../components/FiltrarInscripciones";
 
 const ListarInscriptos = () => {
   const columnas = [
@@ -82,27 +83,34 @@ const ListarInscriptos = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                              {displayedData.map((inscripto, index) => (
-                                  <TableRow key={index}>
-                                      <TableCell>
-                                          {`${inscripto.nombre} ${inscripto.apellido}`}
-                                      </TableCell>
+                {displayedData.map((inscripto, index) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      {`${inscripto.nombre} ${inscripto.apellido}`}
+                    </TableCell>
 
-                                      <TableCell>{inscripto.edad}</TableCell>
-                                      <TableCell>{inscripto.numCel || "-"}</TableCell>
-                                      <TableCell>
-                                          {`${inscripto.nombrePadre} ${inscripto.apellidoPadre}`}
-                                      </TableCell>
-                                      <TableCell>{inscripto.telefonoPadre}</TableCell>
+                    <TableCell>{inscripto.edad}</TableCell>
+                    <TableCell>{inscripto.numCel || "-"}</TableCell>
+                    <TableCell>
+                      {`${inscripto.nombrePadre} ${inscripto.apellidoPadre}`}
+                    </TableCell>
+                    <TableCell>{inscripto.telefonoPadre}</TableCell>
 
-                                      <TableCell>{inscripto.emailPadre}</TableCell>
+                    <TableCell>{inscripto.emailPadre}</TableCell>
 
-                                      <TableCell>{inscripto.disciplinas6a9.length > 0 ? inscripto.disciplinas6a9.join(", ") : "-"}</TableCell>
-                                      <TableCell>{inscripto.disciplinas10a15.length > 0 ? inscripto.disciplinas10a15.join(", ") : "-"}</TableCell>
-                                      <TableCell>{inscripto.comentario || "-"}</TableCell>
-
-                                  </TableRow>
-                              ))}
+                    <TableCell>
+                      {inscripto.disciplinas6a9.length > 0
+                        ? inscripto.disciplinas6a9.join(", ")
+                        : "-"}
+                    </TableCell>
+                    <TableCell>
+                      {inscripto.disciplinas10a15.length > 0
+                        ? inscripto.disciplinas10a15.join(", ")
+                        : "-"}
+                    </TableCell>
+                    <TableCell>{inscripto.comentario || "-"}</TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
             {/* Componente de paginación */}
@@ -148,9 +156,17 @@ const ListarInscriptos = () => {
           disabled={loadingInscriptos}
           onClick={handleExport}
         >
-          Excel
+          Todos
         </Button>
       </div>
+
+      {!loadingInscriptos && (
+        <FiltroInscriptos
+          inscriptos={inscriptos}
+          loadingInscriptos={loadingInscriptos}
+        />
+      )}
+      
     </>
   );
 };
