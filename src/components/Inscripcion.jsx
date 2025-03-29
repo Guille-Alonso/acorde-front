@@ -302,7 +302,7 @@ const disciplinasRef = useRef(null);
             ➡Las Clases son de 1 hs. de duración: <br />
             (De 6 a 9 años el horario es de <strong>18:30hs a 19:30hs</strong>)
             <br />
-            (De 10 a 15 años el horario es de <strong>20hs a 21hs</strong>)
+            (De 10 a 15 años el horario es de <strong>19:45hs a 20:45hs</strong>)
             <br />
             <br />
             ➡El valor de la cuota es de <strong>$35.000</strong> asistiendo una
