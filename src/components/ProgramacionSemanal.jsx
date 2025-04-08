@@ -2,8 +2,8 @@ import React from "react";
 import { Grid, FormControlLabel, Checkbox, Typography, Box, FormHelperText, CircularProgress, useMediaQuery } from "@mui/material";
 import "./FormularioInicial.css"
 import useGet from "../hooks/useGet";
-import { axios } from "../config/axios";
 import rubitoConGuitarra from "../assets/rubitoConGuitarra.jpg"
+import axios from "../config/axios";
 
 const ProgramacionSemanal = ({
   edad,

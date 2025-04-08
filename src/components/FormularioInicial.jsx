@@ -27,9 +27,9 @@ import luchaCanta from "../assets/luchaCanta.jpg"
 import cantora from "../assets/cantoraRec.jpg"
 import pibeOk from "../assets/pibeOk.jpg"
 import "./FormularioInicial.css"
-import { axios } from '../config/axios';
 import { PREINSCRIPCION_VALUES } from '../helpers';
 import { useNavigate } from 'react-router-dom';
+import axios from '../config/axios';
 
 const FormularioInicial = () => {
   const [formValues, setFormValues] = useState(PREINSCRIPCION_VALUES);

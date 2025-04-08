@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import useGet from "../hooks/useGet";
-import { axios } from "../config/axios";
 import {
   Table,
   TableBody,
@@ -17,6 +16,7 @@ import {
 } from "@mui/material";
 import { exportToExcel } from "../utils/exportarExcel";
 import { obtenerHoraArgentina } from "../utils/obtenerFechaYHoraActual";
+import axios from "../config/axios";
 
 const ListarPreInscriptos = () => {
   const columnas = [

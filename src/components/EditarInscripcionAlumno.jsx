@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogTitle, DialogContent, DialogActions, Select, MenuItem, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { axios } from "../config/axios";
 import useGet from "../hooks/useGet";
+import axios from "../config/axios";
 
 const alumnos = [
   {
