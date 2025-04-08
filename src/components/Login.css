@@ -36,6 +36,7 @@
     .imgLogin {
         background-size: 70px;
         /* Más chico en mobile */
+        min-height: 95vh;
     }
 }
   

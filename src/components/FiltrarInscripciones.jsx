@@ -3,42 +3,7 @@ import { useState } from "react";
 import { exportToExcel } from "../utils/exportarExcel";
 import { obtenerHoraArgentina } from "../utils/obtenerFechaYHoraActual";
 
-// const inscriptos = [
-//   {
-//     _id: "67a694b3d0df94b65c3084ca",
-//     nombre: "Luj",
-//     apellido: "Rodriguez Villecco",
-//     edad: 6,
-//     disciplinas6a9: ["Martes-Canto"],
-//     disciplinas10a15: [],
-//   },
-//   {
-//     _id: "67a69d1dd0df94b65c3084fc",
-//     nombre: "Micaela",
-//     apellido: "de Figueiredo",
-//     edad: 6,
-//     disciplinas6a9: ["Jueves-Canto"],
-//     disciplinas10a15: [],
-//   },
-//   {
-//     _id: "67a69d6fd0df94b65c308517",
-//     nombre: "Julia",
-//     apellido: "Lozano Muñoz",
-//     edad: 9,
-//     disciplinas6a9: ["Lunes-Canto"],
-//     disciplinas10a15: [],
-//   },
-//   {
-//     _id: "67a69e0ed0df94b65c308532",
-//     nombre: "Sara",
-//     apellido: "Paz Posse",
-//     edad: 14,
-//     disciplinas6a9: [],
-//     disciplinas10a15: ["Jueves-Guitarra"],
-//   },
-// ];
-
-export default function FiltroInscriptos({inscriptos, loadingInscriptos}) {
+export default function FiltroInscriptos({ inscriptos, loadingInscriptos }) {
   const [rangoEdad, setRangoEdad] = useState("6a9");
   const [disciplina, setDisciplina] = useState("");
   const [dia, setDia] = useState("");
@@ -67,15 +32,15 @@ export default function FiltroInscriptos({inscriptos, loadingInscriptos}) {
   const clearArray = (data) => {
     return data.map(({ _id, __v, ...rest }) => rest);
   };
-  
-    const handleExport = () => {
-        exportToExcel(clearArray(filtrarInscriptos()), `Inscripción al ${obtenerHoraArgentina()}`);
-      };
+
+  const handleExport = () => {
+    exportToExcel(clearArray(filtrarInscriptos()), `Inscripción al ${obtenerHoraArgentina()}`);
+  };
 
   return (
-    <Container sx={{marginTop: "8px"}}>
+    <Container sx={{ marginTop: "8px" }}>
       <h2>Filtrar Inscriptos</h2>
-      <Container sx={{marginTop: "10px"}}>
+      <Container sx={{ marginTop: "10px" }}>
         <label>Edad: </label>
         <select
           value={rangoEdad}
@@ -84,7 +49,7 @@ export default function FiltroInscriptos({inscriptos, loadingInscriptos}) {
           <option value="6a9">6 a 9 años</option>
           <option value="10a15">10 a 15 años</option>
         </select>
-<br />
+        <br />
         <label>Disciplina: </label>
         <select
           value={disciplina}
@@ -98,7 +63,7 @@ export default function FiltroInscriptos({inscriptos, loadingInscriptos}) {
           <option value="Violín">Violín</option>
           <option value="Percusión">Percusión</option>
         </select>
-<br />
+        <br />
         <label>Día: </label>
         <select value={dia} onChange={(e) => setDia(e.target.value)}>
           <option value="">Todos</option>
@@ -110,16 +75,8 @@ export default function FiltroInscriptos({inscriptos, loadingInscriptos}) {
         </select>
       </Container>
 
-      {/* <h3>Resultados:</h3>
-      <ul>
-        {filtrarInscriptos().map((inscripto) => (
-          <li key={inscripto._id}>
-            {inscripto.nombre} {inscripto.apellido} - {rangoEdad === "6a9" ? inscripto.disciplinas6a9.join(", ") : inscripto.disciplinas10a15.join(", ")}
-          </li>
-        ))}
-      </ul> */}
       <Button
-        sx={{ marginTop: "10px", marginBottom: "15px"}}
+        sx={{ marginTop: "10px", marginBottom: "15px" }}
         variant="outlined"
         color="success"
         disabled={loadingInscriptos}
@@ -130,3 +87,4 @@ export default function FiltroInscriptos({inscriptos, loadingInscriptos}) {
     </Container>
   );
 }
+

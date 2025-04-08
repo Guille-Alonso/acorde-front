@@ -133,7 +133,7 @@ const ListarInscriptos = () => {
             sx={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "start",
               height: "96vh", // Ocupa todo el alto de la ventana
             }}
           >
