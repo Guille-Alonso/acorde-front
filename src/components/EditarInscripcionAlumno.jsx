@@ -1,26 +1,9 @@
 import { useState } from "react";
-import { TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogTitle, DialogContent, DialogActions, Select, MenuItem, IconButton } from "@mui/material";
+import { TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogTitle, DialogContent, DialogActions, Select, MenuItem, IconButton, Box, CircularProgress, Tooltip } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useGet from "../hooks/useGet";
 import axios from "../config/axios";
-
-const alumnos = [
-  {
-    _id: "67a694b3d0df94b65c3084ca",
-    nombre: "Luj",
-    apellido: "Rodriguez Villecco",
-    edad: 6,
-    numCel: "3815616391",
-    nombrePadre: "Emilce",
-    telefonoPadre: "03815616391",
-    apellidoPadre: "Bertini",
-    emailPadre: "emilcebertini@hotmail.com",
-    comentario: "",
-    fecha: "7/2/25, 8:18:11 p. m.",
-    disciplinas6a9: ["Martes-Canto"],
-    disciplinas10a15: []
-  }
-];
+import EditIcon from '@mui/icons-material/Edit';
 
 const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 const disciplinas = ["Canto", "Guitarra", "Piano", "Ukelele", "Violín", "Percusión"];
@@ -114,42 +97,67 @@ export default function EditarInscripcionAlumno() {
         margin="normal"
         onChange={(e) => setBusqueda(e.target.value)}
       />
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Nombre</TableCell>
-              <TableCell>Apellido</TableCell>
-              <TableCell>Edad</TableCell>
-              <TableCell>Disciplinas</TableCell>
-              <TableCell>Acciones</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {!loadingInscriptos &&
-              alumnosFiltrados.map((alumno) => (
-                <TableRow key={alumno._id}>
-                  <TableCell>{alumno.nombre}</TableCell>
-                  <TableCell>{alumno.apellido}</TableCell>
-                  <TableCell>{alumno.edad}</TableCell>
-                  <TableCell>
-                    {alumno.edad <= 9
-                      ? alumno.disciplinas6a9.join(", ")
-                      : alumno.disciplinas10a15.join(", ")}
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      onClick={() => manejarEdicion(alumno)}
-                      variant="contained"
-                    >
-                      Editar
-                    </Button>
-                  </TableCell>
+      {
+        !loadingInscriptos ?
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Nombre</TableCell>
+                  <TableCell>Apellido</TableCell>
+                  <TableCell>Edad</TableCell>
+                  <TableCell>Disciplinas</TableCell>
+                  <TableCell>Acciones</TableCell>
                 </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+              </TableHead>
+              <TableBody>
+                {!loadingInscriptos &&
+                  alumnosFiltrados.map((alumno) => (
+                    <TableRow key={alumno._id}>
+                      <TableCell>{alumno.nombre}</TableCell>
+                      <TableCell>{alumno.apellido}</TableCell>
+                      <TableCell>{alumno.edad}</TableCell>
+                      <TableCell>
+                        {alumno.edad <= 9
+                          ? alumno.disciplinas6a9.join(", ")
+                          : alumno.disciplinas10a15.join(", ")}
+                      </TableCell>
+                      {/* <TableCell>
+                        <Button
+                          onClick={() => manejarEdicion(alumno)}
+                          variant="contained"
+                        >
+                          Editar
+                        </Button>
+                      </TableCell> */}
+                      <TableCell>
+                        <Tooltip title="Editar">
+                          <IconButton onClick={() => manejarEdicion(alumno)} color="primary">
+                            <EditIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
+                    </TableRow>
+                  ))
+
+
+
+                }
+              </TableBody>
+            </Table>
+          </TableContainer>
+          :
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "start",
+              height: "96vh", // Ocupa todo el alto de la ventana
+            }}
+          >
+            <CircularProgress sx={{ color: "#DFA57C" }} />
+          </Box>
+      }
 
       {alumnoSeleccionado && (
         <Dialog
