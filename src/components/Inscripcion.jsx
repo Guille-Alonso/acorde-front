@@ -28,10 +28,10 @@ import luchaCanta from "../assets/luchaCanta.jpg"
 import cantora from "../assets/cantoraRec.jpg"
 import pibeOk from "../assets/pibeOk.jpg"
 import "./FormularioInicial.css"
-import { axios } from '../config/axios';
 import { INSCRIPCION_VALUES, PREINSCRIPCION_VALUES } from '../helpers';
 import { useNavigate } from 'react-router-dom';
 import ProgramacionSemanal from './ProgramacionSemanal';
+import axios from '../config/axios';
 
 const Inscripcion = () => {
   const [formValues, setFormValues] = useState(INSCRIPCION_VALUES);

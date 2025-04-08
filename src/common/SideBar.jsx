@@ -16,6 +16,8 @@ import LockPersonIcon from '@mui/icons-material/LockPerson';
 import "./SideBar.css";
 import { useContext } from "react";
 import { AcordeContext } from "../context/AcordeContext";
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import { LibraryMusic } from "@mui/icons-material";
 
 export default function ListaPrueba() {
   const navigate = useNavigate();
@@ -104,7 +106,7 @@ export default function ListaPrueba() {
         )}
       </div>
 
-      <div className="d-flex flex-column justify-content-center align-items-cente">
+      <div className="d-flex flex-column justify-content-center align-items-center">
         <p className="footer text-center">Acorde - 2025</p>
       </div>
     </Box>
@@ -120,7 +122,8 @@ export default function ListaPrueba() {
         sx={{ mr: 2 }}
         onClick={()=>toggleDrawer(true)}
       >
-        <MenuIcon />
+        <LibraryMusic fontSize="large"/>
+
       </IconButton>
       <SwipeableDrawer
         anchor="left"
