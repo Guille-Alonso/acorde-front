@@ -3,7 +3,7 @@ import { TextField, Button, Typography, Box, Alert, IconButton, InputAdornment }
 import { AcordeContext } from "../context/AcordeContext";
 import { useNavigate } from "react-router-dom";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import "./login.css"
+import "./Login.css"
 
 const Login = () => {
 
