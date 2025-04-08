@@ -1,5 +1,5 @@
 import React from 'react'
-import "./admin.css"
+import "./Admin.css"
 // import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 // import Card from "../common/Card/Card";
 
