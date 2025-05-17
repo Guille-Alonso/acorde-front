@@ -11,6 +11,8 @@ import Layout from './common/Layout'
 import Login from './components/Login'
 import PrivateRoute from './routes/PrivateRoute'
 import Admin from './pages/Admin'
+import HomeKids from './pages/HomeKids'
+import InscripcionKids from './components/InscripcionKids'
 
 function App() {
 
@@ -41,7 +43,9 @@ function App() {
             </Route>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/*" element={<Home />} />
+            <Route exact path="/kids" element={<HomeKids />} />
             <Route exact path="/formInicial" element={<Inscripcion />} />
+            <Route exact path="/formInicialKids" element={<InscripcionKids />} />
             <Route
               exact
               path="/preinscripcionExitosa"
