@@ -124,17 +124,17 @@ const dia = useRef(null);
     e.preventDefault();
     try {
       if (validate()) {
-        console.log('Formulario válido:', formValues);
+        // console.log('Formulario válido:', formValues);
         // alert('Formulario enviado correctamente');
-        // const {data} = await axios.post("formularios/inscripcionKids",formValues)
-        // // console.log(data);
-        // setNotificacion({mensaje:"¡Inscripción exitosa!", tipo:"success"})
-        // handleOpenNotify();
-        // setFormValues(INSCRIPCION_VALUES_KIDS);
-        // localStorage.setItem("monto","$40.000");
-        // setTimeout(() => {
-        //    navigate("/preinscripcionExitosa")
-        // }, 3000);
+        const {data} = await axios.post("formularios/inscripcionKids",formValues)
+        // console.log(data);
+        setNotificacion({mensaje:"¡Inscripción exitosa!", tipo:"success"})
+        handleOpenNotify();
+        setFormValues(INSCRIPCION_VALUES_KIDS);
+        localStorage.setItem("monto","$40.000");
+        setTimeout(() => {
+           navigate("/preinscripcionExitosa")
+        }, 3000);
        
       } else {
         console.log('Errores en el formulario:', errors);
