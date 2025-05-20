@@ -1,6 +1,6 @@
 import React from 'react';
 import logoAcorde from "../assets/kids1.jpeg";
-import logoAcorde2 from "../assets/kids2.jpeg";
+import logoAcorde2 from "../assets/ultimapie.jpeg";
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
