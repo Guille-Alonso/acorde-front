@@ -30,3 +30,16 @@ export const PREINSCRIPCION_VALUES = {
     disciplinas10a15: [],
     idDisciplina: []
   }
+
+    export const INSCRIPCION_VALUES_KIDS = {
+    nombre: '',
+    apellido: '',
+    edad: '',
+    numCel: '',
+    nombrePadre: '',
+    telefonoPadre: '',
+    apellidoPadre: '',
+    emailPadre: '',
+    comentario: '',
+    dia: ''
+  }

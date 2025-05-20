@@ -22,19 +22,20 @@ import {
   Typography,
 } from '@mui/material';
 import nenaInicio from "../assets/inicioForm.jpg"
-import niñopianocortado from "../assets/niñopianocortado.jpg"
+// import niñopianocortado from "../assets/bomboytrompetacortado.jpeg"
+import niñopianocortado from "../assets/bombomejorada.jpeg"
 import rubitoConGuitarra from "../assets/rubitoConGuitarra.jpg"
-import luchaCanta from "../assets/luchaCanta.jpg"
-import cantora from "../assets/cantoraRec.jpg"
+import luchaCanta from "../assets/guitarra.jpeg"
+import cantora from "../assets/parlante.jpeg"
 import pibeOk from "../assets/pibeOk.jpg"
 import "./FormularioInicial.css"
-import { INSCRIPCION_VALUES, PREINSCRIPCION_VALUES } from '../helpers';
+import { INSCRIPCION_VALUES, INSCRIPCION_VALUES_KIDS, PREINSCRIPCION_VALUES } from '../helpers';
 import { useNavigate } from 'react-router-dom';
 import ProgramacionSemanal from './ProgramacionSemanal';
 import axios from '../config/axios';
 
 const InscripcionKids = () => {
-  const [formValues, setFormValues] = useState(INSCRIPCION_VALUES);
+  const [formValues, setFormValues] = useState(INSCRIPCION_VALUES_KIDS);
 
 const [errors, setErrors] = useState({});
 const [focusedField, setFocusedField] = useState('');
@@ -44,10 +45,7 @@ const [focusedField, setFocusedField] = useState('');
 
     setFormValues({
       ...formValues,
-      [name]: type === "checkbox" ? checked : value,
-      disciplinas6a9: name === "edad" ? [] : formValues.disciplinas6a9,
-      disciplinas10a15: name === "edad" ? [] : formValues.disciplinas10a15,
-      idDisciplina: name === "edad" ? [] : formValues.idDisciplina
+      [name]: type === "checkbox" ? checked : value
     });
     
   };
@@ -67,10 +65,15 @@ const apellidoPadreRef = useRef(null);
 const telefonoPadreRef = useRef(null);
 const emailPadreRef = useRef(null);
 
-const disciplinasRef = useRef(null);
+const dia = useRef(null);
 
   const validate = () => {
     const newErrors = {};
+
+    if (!formValues.dia){
+      newErrors.dia = 'Seleccione una día por favor';
+      if (dia.current) dia.current.focus();
+    } 
 
     if (!formValues.nombre){
       newErrors.nombre = 'El nombre es obligatorio';
@@ -82,8 +85,8 @@ const disciplinasRef = useRef(null);
       if (apellidoAlumnoRef.current) apellidoAlumnoRef.current.focus();
     }
 
-    if (!formValues.edad || isNaN(formValues.edad) || !Number(formValues.edad) > 0 || Number(formValues.edad) < 6 || formValues.edad < 6 || formValues.edad > 15){
-      newErrors.edad = 'Debe tener entre 6 y 15 años';
+    if (!formValues.edad || isNaN(formValues.edad) || !Number(formValues.edad) > 0 || Number(formValues.edad) < 4 || formValues.edad < 4 || formValues.edad > 5){
+      newErrors.edad = 'Debe tener entre 4 y 5 años';
       if (edadAlumnoRef.current) edadAlumnoRef.current.focus();
     }
 
@@ -108,11 +111,6 @@ const disciplinasRef = useRef(null);
       if (emailPadreRef.current) emailPadreRef.current.focus();
     } 
 
-    if (formValues.disciplinas6a9.length == 0 && formValues.disciplinas10a15.length == 0){
-      newErrors.disciplinas = 'Debe ingresar al menos una clase de los grupos establecidos.';
-      if (disciplinasRef.current) disciplinasRef.current.focus();
-    } 
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -126,17 +124,17 @@ const disciplinasRef = useRef(null);
     e.preventDefault();
     try {
       if (validate()) {
-        // console.log('Formulario válido:', formValues);
+        console.log('Formulario válido:', formValues);
         // alert('Formulario enviado correctamente');
-        const {data} = await axios.post("formularios/inscripcion",formValues)
-        // console.log(data);
-        setNotificacion({mensaje:"¡Inscripción exitosa!", tipo:"success"})
-        handleOpenNotify();
-        setFormValues(INSCRIPCION_VALUES);
-        localStorage.setItem("monto",formValues.disciplinas6a9.length == 1 || formValues.disciplinas10a15.length == 1 ? "$35.000" : "$55.000" )
-        setTimeout(() => {
-           navigate("/preinscripcionExitosa")
-        }, 3000);
+        // const {data} = await axios.post("formularios/inscripcionKids",formValues)
+        // // console.log(data);
+        // setNotificacion({mensaje:"¡Inscripción exitosa!", tipo:"success"})
+        // handleOpenNotify();
+        // setFormValues(INSCRIPCION_VALUES_KIDS);
+        // localStorage.setItem("monto","$40.000");
+        // setTimeout(() => {
+        //    navigate("/preinscripcionExitosa")
+        // }, 3000);
        
       } else {
         console.log('Errores en el formulario:', errors);
@@ -163,7 +161,7 @@ const disciplinasRef = useRef(null);
   const imageStyleInicioForm = {
     borderRadius: '8px',
     maxWidth: isSmallScreen ? '100%' : '40vw', // Ancho 100% en pantallas pequeñas, auto en otras
-    maxHeight: isSmallScreen ? 'auto' : '60vh', // Ajusta la altura en pantallas pequeñas
+    maxHeight: isSmallScreen ? '65vh' : '70vh', // Ajusta la altura en pantallas pequeñas
   };
 
   const imageStyleRubitoConGuitarra = {
@@ -213,6 +211,10 @@ const disciplinasRef = useRef(null);
         };
       }
     });
+  };
+
+   const handleCheckboxChange = (diaSeleccionado) => {
+    setFormValues({...formValues, dia: diaSeleccionado });
   };
 
   const [open, setOpen] = useState(false);
@@ -290,8 +292,7 @@ const disciplinasRef = useRef(null);
           />
           <StepLabel sx={{ textAlign: "justify", marginTop: 1 }}>
             <Typography sx={{ color: "#9AB1BC" }}>
-              Hola! Les compartimos la programación de las clases para la
-              academia de ACORDE 2025, y los siguientes datos para tener en
+              Hola! Les compartimos la programación de las clases para los mas pequeños de 4 y 5 años, en la academia de ACORDE 2025, y los siguientes datos para tener en
               cuenta:
             </Typography>{" "}
             <br /> <br />
@@ -299,21 +300,13 @@ const disciplinasRef = useRef(null);
             Markay).
             <br />
             <br />
-            ➡Las Clases son de 1 hs. de duración: <br />
-            (De 6 a 9 años el horario es de <strong>18:30hs a 19:30hs</strong>)
-            <br />
-            (De 10 a 15 años el horario es de <strong>19:45hs a 20:45hs</strong>
-            )
+            ➡Las clases son una vez a la semana, se puede elegir los días LUNES o JUEVES de 18.30hs a 19.30hs.
             <br />
             <br />
-            ➡El valor de la cuota es de <strong>$35.000</strong> asistiendo una
-            vez por semana. <br />
-            (En caso de elegir dos disciplinas (por ejemplo canto y piano) la
-            cuota es de <strong>$55.000</strong> asistiendo 2 veces por semana).
+            ➡El valor de la cuota es de $40.000.
             <br />
             <br />
-            ➡Los grupos son con cupo de hasta 10 alumnos. Los lugares se van
-            completando según el orden de confirmación y de pago de la cuota.
+            ➡Las clases de este grupo, inician el Lunes 2 de Junio. Los grupos son con cupos reducidos, se asegura el lugar abonando la cuota de Junio.
           </StepLabel>
         </Grid>
         <form onSubmit={handleSubmit}>
@@ -618,100 +611,80 @@ const disciplinasRef = useRef(null);
               Clases Musicales para niños de 4 a 5 años
             </p>
             <Grid container columnSpacing={2}>
+
               <Grid item xs={12} md={6}>
-                <TextField
-                  inputRef={nombrePadreRef}
-                  label="Nombre"
-                  name="nombrePadre"
-                  value={formValues.nombrePadre}
-                  onChange={(e) => {
-                    // Verificar si el input contiene solo letras y acentos
-                    if (/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(e.target.value)) {
-                      handleChange(e);
-                    }
-                  }}
-                  inputProps={{ maxLength: 40 }}
-                  onFocus={() => handleFocus("nombrePadre")}
-                  margin="normal"
-                  fullWidth
-                  error={!!errors.nombrePadre}
-                  helperText={errors.nombrePadre}
-                  sx={{
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused, &.MuiInputLabel-shrink": {
+                <FormControl error={!!errors.dia} component="fieldset">
+
+                  <FormControlLabel
+                    onFocus={() => handleFocus("dia")}
+                    error={!!errors.dia}
+                    sx={{
+                      "& .MuiFormLabel-root.Mui-focused": {
+                        color: formValues.dia === "LUNES de 18.30hs a 19.30hs" ? "#9AB1BC" : undefined,
+                      },
+                      "& .MuiOutlinedInput-root.Mui-focused": {
+                        "& fieldset": {
+                          borderColor: "#DFA57C",
+                        },
+                      },
+                      "& .MuiCheckbox-root.Mui-checked": {
                         color: "#DFA57C",
                       },
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
-                        {
-                          "& fieldset": {
-                            borderColor: "#DFA57C",
-                          },
-                        },
-                    },
-                  }}
-                />
+                      "& .MuiFormLabel-root:not(.Mui-focused)": {
+                        color: "#DFA57C",
+                      },
+                    }}
+                    control={
+                      <Checkbox
+                        inputRef={dia}
+                        checked={formValues.dia === "LUNES de 18.30hs a 19.30hs"}
+                        onChange={() => handleCheckboxChange("LUNES de 18.30hs a 19.30hs")}
+                      />
+                    }
+                    label="LUNES de 18.30hs a 19.30hs"
+                  />
+                  {/* {errors.dia && <FormHelperText>{errors.dia}</FormHelperText>} */}
+                </FormControl>
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <TextField
-                  inputRef={apellidoPadreRef}
-                  label="Apellido"
-                  name="apellidoPadre"
-                  value={formValues.apellidoPadre}
-                  onChange={(e) => {
-                    // Verificar si el input contiene solo letras y acentos
-                    if (/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(e.target.value)) {
-                      handleChange(e);
-                    }
-                  }}
-                  inputProps={{ maxLength: 40 }}
-                  onFocus={() => handleFocus("apellidoPadre")}
-                  margin="normal"
-                  fullWidth
-                  error={!!errors.apellidoPadre}
-                  helperText={errors.apellidoPadre}
-                  sx={{
-                    "& .MuiInputLabel-root": {
-                      "&.Mui-focused, &.MuiInputLabel-shrink": {
+                <FormControl error={!!errors.dia} component="fieldset">
+
+
+                  <FormControlLabel
+                    sx={{
+                      "& .MuiFormLabel-root.Mui-focused": {
+                        color: formValues.dia === "JUEVES de 18.30hs a 19.30hs" ? "#9AB1BC" : undefined,
+                      },
+                      "& .MuiOutlinedInput-root.Mui-focused": {
+                        "& fieldset": {
+                          borderColor: "#DFA57C",
+                        },
+                      },
+                      "& .MuiCheckbox-root.Mui-checked": {
                         color: "#DFA57C",
                       },
-                    },
-                    "& .MuiOutlinedInput-root": {
-                      "&.Mui-focused, &.MuiInputBase-root:not(:placeholder-shown)":
-                        {
-                          "& fieldset": {
-                            borderColor: "#DFA57C",
-                          },
-                        },
-                    },
-                  }}
-                />
+                      "& .MuiFormLabel-root:not(.Mui-focused)": {
+                        color: "#DFA57C",
+                      },
+                    }}
+                    control={
+                      <Checkbox
+                        inputRef={dia}
+                        checked={formValues.dia === "JUEVES de 18.30hs a 19.30hs"}
+                        onChange={() => handleCheckboxChange("JUEVES de 18.30hs a 19.30hs")}
+                      />
+                    }
+                    label="JUEVES de 18.30hs a 19.30hs"
+                  />
+                  {errors.dia && <FormHelperText>{errors.dia}</FormHelperText>}
+                </FormControl>
               </Grid>
 
               <Grid container style={containerStyle}>
                 <img src={luchaCanta} alt="Centrada" style={imageStylePibeOK} />
               </Grid>
             </Grid>
-
-            {/* {Array.isArray(formValues.disciplinas6a9) &&
-              Array.isArray(formValues.disciplinas10a15) && (
-                <ProgramacionSemanal
-                  formValues={formValues}
-                  handleCheckboxChangeDisciplinas6a9={
-                    handleCheckboxChangeDisciplinas6a9
-                  }
-                  handleCheckboxChangeDisciplinas10a15={
-                    handleCheckboxChangeDisciplinas10a15
-                  }
-                  edad={formValues.edad}
-                  disciplinasRef={disciplinasRef}
-                  errors={errors}
-                  focusedField={focusedField}
-                  handleFocus={handleFocus}
-                />
-              )} */}
 
             <StepLabel sx={{ textAlign: "justify" }}>
               <Typography variant="h6" sx={{ textAlign: "justify", mb: 2 }}>
@@ -793,6 +766,7 @@ const disciplinasRef = useRef(null);
           {notificacion.mensaje}
         </Alert>
       </Snackbar>
+
     </div>
   );
 };
