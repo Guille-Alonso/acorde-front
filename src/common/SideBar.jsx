@@ -53,14 +53,14 @@ export default function ListaPrueba() {
       className="d-flex justify-content-between flex-column h-100"
     >
       <div className="d-flex flex-column justify-content-center align-items-start mt-5">
-      {authenticated && (
+        {authenticated && (
           <ListItemButton
             onClick={() => redirigir("/admin")}
             component="a"
             className="w-100"
           >
             <ListItemIcon>
-            <HomeIcon />
+              <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItemButton>
@@ -73,7 +73,7 @@ export default function ListaPrueba() {
             className="w-100"
           >
             <ListItemIcon>
-            <LockPersonIcon />
+              <LockPersonIcon />
             </ListItemIcon>
             <ListItemText primary="Inscripciones" />
           </ListItemButton>
@@ -94,12 +94,25 @@ export default function ListaPrueba() {
 
         {authenticated && (
           <ListItemButton
+            onClick={() => redirigir("/listarInscriptosKids")}
+            component="a"
+            className="w-100"
+          >
+            <ListItemIcon>
+              <LockPersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="Inscripciones Kids" />
+          </ListItemButton>
+        )}
+
+        {authenticated && (
+          <ListItemButton
             onClick={() => redirigir("/listarPreInscriptos")}
             component="a"
             className="w-100"
           >
             <ListItemIcon>
-            <LockPersonIcon />
+              <LockPersonIcon />
             </ListItemIcon>
             <ListItemText primary="PreInscripciones" />
           </ListItemButton>

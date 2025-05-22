@@ -89,6 +89,7 @@ const Login = () => {
         fullWidth
         required
         margin="normal"
+        InputLabelProps={{ shrink: true }}
       />
 
       <TextField
@@ -109,6 +110,7 @@ const Login = () => {
             </InputAdornment>
           ),
         }}
+        InputLabelProps={{ shrink: true }}
       />
 
       <Button disabled={botonState} type="submit" variant="contained" className="colorBtnLogin" fullWidth sx={{ mt: 2 }}>
