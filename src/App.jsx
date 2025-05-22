@@ -13,6 +13,7 @@ import PrivateRoute from './routes/PrivateRoute'
 import Admin from './pages/Admin'
 import HomeKids from './pages/HomeKids'
 import InscripcionKids from './components/InscripcionKids'
+import ListarInscriptosKids from './pages/ListarInscriptosKids'
 
 function App() {
 
@@ -25,27 +26,59 @@ function App() {
               <Route
                 exact
                 path="/listarPreInscriptos"
-                element={<PrivateRoute key="pre"><ListarPreInscriptos /></PrivateRoute>}
+                element={
+                  <PrivateRoute key="pre">
+                    <ListarPreInscriptos />
+                  </PrivateRoute>
+                }
               />
               <Route
                 exact
                 path="/listarInscriptos"
-                element={<PrivateRoute key="insc"><ListarInscriptos /></PrivateRoute>}
+                element={
+                  <PrivateRoute key="insc">
+                    <ListarInscriptos />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                exact
+                path="/listarInscriptosKids"
+                element={
+                  <PrivateRoute key="inscKids">
+                    <ListarInscriptosKids />
+                  </PrivateRoute>
+                }
               />
               <Route
                 exact
                 path="/editarInscripciones"
-                element={<PrivateRoute key="editarInsc"><EditarInscripcionAlumno /></PrivateRoute>}
+                element={
+                  <PrivateRoute key="editarInsc">
+                    <EditarInscripcionAlumno />
+                  </PrivateRoute>
+                }
               />
-              
-              <Route exact path="/admin" element={<PrivateRoute><Admin /></PrivateRoute>} />
 
+              <Route
+                exact
+                path="/admin"
+                element={
+                  <PrivateRoute>
+                    <Admin />
+                  </PrivateRoute>
+                }
+              />
             </Route>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/*" element={<Home />} />
             <Route exact path="/kids" element={<HomeKids />} />
             <Route exact path="/formInicial" element={<Inscripcion />} />
-            <Route exact path="/formInicialKids" element={<InscripcionKids />} />
+            <Route
+              exact
+              path="/formInicialKids"
+              element={<InscripcionKids />}
+            />
             <Route
               exact
               path="/preinscripcionExitosa"
