@@ -18,6 +18,8 @@ import { useContext } from "react";
 import { AcordeContext } from "../context/AcordeContext";
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import { LibraryMusic } from "@mui/icons-material";
+import ChildCareIcon from '@mui/icons-material/ChildCare';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function ListaPrueba() {
   const navigate = useNavigate();
@@ -86,7 +88,7 @@ export default function ListaPrueba() {
             className="w-100"
           >
             <ListItemIcon>
-              <LockPersonIcon />
+              <EditIcon />
             </ListItemIcon>
             <ListItemText primary="Editar Inscripción" />
           </ListItemButton>
@@ -99,7 +101,7 @@ export default function ListaPrueba() {
             className="w-100"
           >
             <ListItemIcon>
-              <LockPersonIcon />
+              <ChildCareIcon />
             </ListItemIcon>
             <ListItemText primary="Inscripciones Kids" />
           </ListItemButton>
