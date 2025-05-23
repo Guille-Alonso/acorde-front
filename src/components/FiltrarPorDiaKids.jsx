@@ -30,7 +30,7 @@ const FiltroPorDiaKids = ({ datos }) => {
 
   return (
     <>
-      <FormControl sx={{ width: "300px", marginLeft: 4 }} margin="normal">
+      <FormControl sx={{ width: "300px"}} margin="normal">
         <InputLabel>Filtro por Día</InputLabel>
         <Select
           value={diaSeleccionado}
