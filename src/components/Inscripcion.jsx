@@ -305,12 +305,6 @@ const disciplinasRef = useRef(null);
             (De 10 a 15 años el horario es de <strong>19:45hs a 20:45hs</strong>)
             <br />
             <br />
-            ➡El valor de la cuota es de <strong>$35.000</strong> asistiendo una
-            vez por semana. <br />
-            (En caso de elegir dos disciplinas (por ejemplo canto y piano) la
-            cuota es de <strong>$55.000</strong> asistiendo 2 veces por semana).
-            <br />
-            <br />
             ➡Los grupos son con cupo de hasta 10 alumnos. Los lugares se van
             completando según el orden de confirmación y de pago de la cuota.
           </StepLabel>
