@@ -315,7 +315,7 @@ const disciplinasRef = useRef(null);
           <StepLabel sx={{ textAlign: "justify", marginTop: 1 }}>
             <Typography sx={{ color: "#9AB1BC" }}>
               Hola! Les compartimos algunos datos de interés para las Pre-Inscripciones 2026
-              en la academia de ACORDE, un espacio en Yerba Buena para aprender y disfrutar de <br/> la Música!
+              en la academia de ACORDE, un espacio en Yerba Buena para aprender y disfrutar de la Música!
             </Typography>{" "}
             <br /> 
             ➡Las Clases se dictan en Juan XXIII 79 - Yerba Buena (Centro
