@@ -26,6 +26,7 @@ export const PREINSCRIPCION_VALUES = {
     apellidoPadre: '',
     emailPadre: '',
     comentario: '',
+    disciplinas4a5: [],
     disciplinas6a9: [],
     disciplinas10a15: [],
     idDisciplina: []

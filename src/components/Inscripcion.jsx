@@ -45,6 +45,7 @@ const [focusedField, setFocusedField] = useState('');
     setFormValues({
       ...formValues,
       [name]: type === "checkbox" ? checked : value,
+      disciplinas4a5: name === "edad" ? [] : formValues.disciplinas4a5,
       disciplinas6a9: name === "edad" ? [] : formValues.disciplinas6a9,
       disciplinas10a15: name === "edad" ? [] : formValues.disciplinas10a15,
       idDisciplina: name === "edad" ? [] : formValues.idDisciplina
@@ -82,8 +83,8 @@ const disciplinasRef = useRef(null);
       if (apellidoAlumnoRef.current) apellidoAlumnoRef.current.focus();
     }
 
-    if (!formValues.edad || isNaN(formValues.edad) || !Number(formValues.edad) > 0 || Number(formValues.edad) < 6 || formValues.edad < 6 || formValues.edad > 15){
-      newErrors.edad = 'Debe tener entre 6 y 15 años';
+    if (!formValues.edad || isNaN(formValues.edad) || !Number(formValues.edad) > 0 || Number(formValues.edad) < 4 || formValues.edad < 4 || formValues.edad > 15){
+      newErrors.edad = 'Debe tener entre 4 y 15 años';
       if (edadAlumnoRef.current) edadAlumnoRef.current.focus();
     }
 
@@ -108,7 +109,7 @@ const disciplinasRef = useRef(null);
       if (emailPadreRef.current) emailPadreRef.current.focus();
     } 
 
-    if (formValues.disciplinas6a9.length == 0 && formValues.disciplinas10a15.length == 0){
+    if (formValues.disciplinas4a5.length == 0 && formValues.disciplinas6a9.length == 0 && formValues.disciplinas10a15.length == 0){
       newErrors.disciplinas = 'Debe ingresar al menos una clase de los grupos establecidos.';
       if (disciplinasRef.current) disciplinasRef.current.focus();
     } 
@@ -126,14 +127,16 @@ const disciplinasRef = useRef(null);
     e.preventDefault();
     try {
       if (validate()) {
+        // console.log("FORM VALUES INSCRIPCION: ", formValues);
         // console.log('Formulario válido:', formValues);
         // alert('Formulario enviado correctamente');
-        const {data} = await axios.post("formularios/inscripcion",formValues)
+        const {data} = await axios.post("formularios/preInscripcion2026",formValues)
         // console.log(data);
-        setNotificacion({mensaje:"¡Inscripción exitosa!", tipo:"success"})
+        setNotificacion({mensaje:"¡Pre Inscripción exitosa!", tipo:"success"})
         handleOpenNotify();
         setFormValues(INSCRIPCION_VALUES);
-        localStorage.setItem("monto",formValues.disciplinas6a9.length == 1 || formValues.disciplinas10a15.length == 1 ? "$35.000" : "$55.000" )
+        // const totalDisciplinas = formValues.disciplinas4a5.length + formValues.disciplinas6a9.length + formValues.disciplinas10a15.length;
+        // localStorage.setItem("monto", totalDisciplinas == 1 ? "$35.000" : "$55.000" )
         setTimeout(() => {
            navigate("/preinscripcionExitosa")
         }, 3000);
@@ -229,41 +232,62 @@ const disciplinasRef = useRef(null);
     setOpen(false); // Cerrar la alerta
   };
 
-  const handleCheckboxChangeDisciplinas6a9 = (event, dia, disciplina,obj) => {
-    
-    const value = `${dia}-${disciplina}`;
+  const handleCheckboxChangeDisciplinas6a9 = (event, dia, disciplina, obj) => {
+    const value = disciplina;
     setFormValues((prevValues) => {
-      const { disciplinas6a9,idDisciplina } = prevValues;
-      // const { disciplinas6a9 } = prevValues;
+      const { disciplinas6a9, idDisciplina } = prevValues;
       if (event.target.checked) {
         // Si está seleccionado, agregar la disciplina
-        return { ...prevValues, disciplinas6a9: [...disciplinas6a9, value],  idDisciplina: [...idDisciplina, obj._id]};
-        // return { ...prevValues, disciplinas6a9: [...disciplinas6a9, value]};
+        return { 
+          ...prevValues, 
+          disciplinas6a9: [...disciplinas6a9, value],  
+          idDisciplina: obj._id ? [...idDisciplina, obj._id] : idDisciplina
+        };
       } else {
         // Si está deseleccionado, quitar la disciplina
         return {
           ...prevValues,
           disciplinas6a9: disciplinas6a9.filter((item) => item !== value),
-          idDisciplina: idDisciplina.filter((item) => item !== obj._id)
+          idDisciplina: obj._id ? idDisciplina.filter((item) => item !== obj._id) : idDisciplina
         };
       }
     });
   };
 
-  const handleCheckboxChangeDisciplinas10a15 = (event, dia, disciplina,obj) => {
-  
-    const value = `${dia}-${disciplina}`;
+  const handleCheckboxChangeDisciplinas10a15 = (event, dia, disciplina, obj) => {
+    const value = disciplina;
     setFormValues((prevValues) => {
       const { disciplinas10a15, idDisciplina } = prevValues;
       if (event.target.checked) {
         // Si está seleccionado, agregar la disciplina
-        // return { ...prevValues,  disciplinas10a15: [...disciplinas10a15, value] };
-        return { ...prevValues, disciplinas10a15: [...disciplinas10a15, value],  idDisciplina: [...idDisciplina, obj._id]};
+        return { 
+          ...prevValues, 
+          disciplinas10a15: [...disciplinas10a15, value],  
+          idDisciplina: obj._id ? [...idDisciplina, obj._id] : idDisciplina
+        };
       } else {
         // Si está deseleccionado, quitar la disciplina
         return {
           ...prevValues,
           disciplinas10a15: disciplinas10a15.filter((item) => item !== value),
+          idDisciplina: obj._id ? idDisciplina.filter((item) => item !== obj._id) : idDisciplina
+        };
+      }
+    });
+  };
+
+  const handleCheckboxChangeDisciplinas4a5 = (event, disciplina, dummy, obj) => {
+    const value = disciplina;
+    setFormValues((prevValues) => {
+      const { disciplinas4a5, idDisciplina } = prevValues;
+      if (event.target.checked) {
+        // Si está seleccionado, agregar la disciplina
+        return { ...prevValues, disciplinas4a5: [...disciplinas4a5, value], idDisciplina: [...idDisciplina, obj._id] };
+      } else {
+        // Si está deseleccionado, quitar la disciplina
+        return {
+          ...prevValues,
+          disciplinas4a5: disciplinas4a5.filter((item) => item !== value),
           idDisciplina: idDisciplina.filter((item) => item !== obj._id)
         };
       }
@@ -290,11 +314,10 @@ const disciplinasRef = useRef(null);
           />
           <StepLabel sx={{ textAlign: "justify", marginTop: 1 }}>
             <Typography sx={{ color: "#9AB1BC" }}>
-              Hola! Les compartimos la programación de las clases para la
-              academia de ACORDE 2025, y los siguientes datos para tener en
-              cuenta:
+              Hola! Les compartimos algunos datos de interés para las Pre-Inscripciones 2026
+              en la academia de ACORDE, un espacio en Yerba Buena para aprender y disfrutar de <br/> la Música!
             </Typography>{" "}
-            <br /> <br />
+            <br /> 
             ➡Las Clases se dictan en Juan XXIII 79 - Yerba Buena (Centro
             Markay).
             <br />
@@ -305,14 +328,13 @@ const disciplinasRef = useRef(null);
             (De 10 a 15 años el horario es de <strong>19:45hs a 20:45hs</strong>)
             <br />
             <br />
-            ➡Los grupos son con cupo de hasta 10 alumnos. Los lugares se van
-            completando según el orden de confirmación y de pago de la cuota.
+            ➡Los grupos son con cupos reducidos, los lugares se van ocupando según el orden de confirmación y el pago de la matrícula 2026.
           </StepLabel>
         </Grid>
         <form onSubmit={handleSubmit}>
           <Grid container sx={{ marginTop: 2 }}>
             <p className="colorDatosAlumno" component="legend">
-              Datos del alumno/a
+              Datos del interesado/a
             </p>
             <Grid container columnSpacing={2}>
               <Grid item xs={12} md={6}>
@@ -606,7 +628,8 @@ const disciplinasRef = useRef(null);
                 <img src={luchaCanta} alt="Centrada" style={imageStylePibeOK} />
               </Grid>
             </Grid>
-            {Array.isArray(formValues.disciplinas6a9) &&
+            {Array.isArray(formValues.disciplinas4a5) &&
+              Array.isArray(formValues.disciplinas6a9) &&
               Array.isArray(formValues.disciplinas10a15) && (
                 <ProgramacionSemanal
                   formValues={formValues}
@@ -615,6 +638,9 @@ const disciplinasRef = useRef(null);
                   }
                   handleCheckboxChangeDisciplinas10a15={
                     handleCheckboxChangeDisciplinas10a15
+                  }
+                  handleCheckboxChangeDisciplinas4a5={
+                    handleCheckboxChangeDisciplinas4a5
                   }
                   edad={formValues.edad}
                   disciplinasRef={disciplinasRef}
@@ -625,7 +651,7 @@ const disciplinasRef = useRef(null);
               )}
 
             <StepLabel sx={{ textAlign: "justify" }}>
-              <Typography variant="h6" sx={{ textAlign: "justify", mb:2 }}>
+              {/* <Typography variant="h6" sx={{ textAlign: "justify", mb:2 }}>
                <strong> Información del Pago</strong>
               </Typography>
               ➡La cuota debe abonarse del 1 al 10 de cada mes, transfiriendo al
@@ -633,9 +659,9 @@ const disciplinasRef = useRef(null);
               <br />
               <br />
               ➡Enviar comprobante por correo a <strong>acorde.yb@gmail.com</strong>
-              <br />
-              {/* <br />
-              ➡<strong>El pago de Marzo lo estamos solicitando ahora, para confirmar la inscripción.</strong> */}
+              <br /> */}
+              {/* <br /> */}
+              ➡<strong>Una vez llenados sus datos, nosotros vamos a contactarlos y comentarles más detalles respecto a la inscripción 2026.</strong>
             </StepLabel>
 
             <Grid item xs={12} md={12}>
@@ -675,7 +701,7 @@ const disciplinasRef = useRef(null);
             justifyContent="center"
             alignItems="center"
           >
-            <img src={cantora} alt="Centrada" style={imageStylePibeOK} />
+            {/* <img src={cantora} alt="Centrada" style={imageStylePibeOK} /> */}
             <Button
               className="botonEnviarFormPreInscripcion"
               type="submit"
@@ -683,7 +709,7 @@ const disciplinasRef = useRef(null);
               disabled={botonState}
               sx={{ marginTop: 1 }}
             >
-              Inscribir
+              Enviar
             </Button>
           </Grid>
         </form>
