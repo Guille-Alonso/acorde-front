@@ -25,14 +25,14 @@ const ProgramacionSemanal = ({
     {
       rangoEdad: [6, 9],
       titulo: "6 a 9 años",
-      disciplinas: ["Canto", "Piano", "Guitarra", "Ukelele", "Violín"],
+      disciplinas: ["Canto", "Piano", "Guitarra", "Ukelele", "Violín", "Percusión"],
       formKey: "disciplinas6a9",
       handler: "handleCheckboxChangeDisciplinas6a9"
     },
     {
       rangoEdad: [10, 15],
       titulo: "10 a 15 años",
-      disciplinas: ["Canto", "Piano", "Guitarra", "Ukelele", "Violín"],
+      disciplinas: ["Canto", "Piano", "Guitarra", "Ukelele", "Violín", "Percusión"],
       formKey: "disciplinas10a15",
       handler: "handleCheckboxChangeDisciplinas10a15"
     }
