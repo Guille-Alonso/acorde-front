@@ -119,6 +119,19 @@ export default function ListaPrueba() {
             <ListItemText primary="PreInscripciones" />
           </ListItemButton>
         )}
+
+        {authenticated && (
+          <ListItemButton
+            onClick={() => redirigir("/listarPreInscriptos2026")}
+            component="a"
+            className="w-100"
+          >
+            <ListItemIcon>
+              <LockPersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="PreInscripciones 2026" />
+          </ListItemButton>
+        )}
       </div>
 
       <div className="d-flex flex-column justify-content-center align-items-center">

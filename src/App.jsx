@@ -14,6 +14,7 @@ import Admin from './pages/Admin'
 import HomeKids from './pages/HomeKids'
 import InscripcionKids from './components/InscripcionKids'
 import ListarInscriptosKids from './pages/ListarInscriptosKids'
+import ListarPreInscripciones2026 from './pages/ListarPreinscripciones2026'
 
 function App() {
 
@@ -29,6 +30,15 @@ function App() {
                 element={
                   <PrivateRoute key="pre">
                     <ListarPreInscriptos />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                exact
+                path="/listarPreInscriptos2026"
+                element={
+                  <PrivateRoute key="pre">
+                    <ListarPreInscripciones2026 />
                   </PrivateRoute>
                 }
               />
