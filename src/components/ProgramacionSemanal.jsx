@@ -18,7 +18,7 @@ const ProgramacionSemanal = ({
     {
       rangoEdad: [4, 5],
       titulo: "4 y 5 años",
-      disciplinas: ["Canto"],
+      disciplinas: ["Introducción musical (canto, percusión, juegos y dinámicas rítmicas, entrenamiento del oído musical)"],
       formKey: "disciplinas4a5",
       handler: "handleCheckboxChangeDisciplinas4a5"
     },
