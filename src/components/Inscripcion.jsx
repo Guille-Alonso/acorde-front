@@ -322,7 +322,7 @@ const disciplinasRef = useRef(null);
             Markay).
             <br />
             <br />
-            ➡Las Clases son de 1 hs. de duración: <br />
+            ➡Las Clases son de 1:15 hs. de duración: <br />
             (De 4 a 9 años el horario es de <strong>18:15hs a 19:30hs</strong>)
             <br />
             (De 10 a 15 años el horario es de <strong>19:45hs a 21:00hs</strong>)
