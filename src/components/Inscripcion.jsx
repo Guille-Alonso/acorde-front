@@ -323,9 +323,9 @@ const disciplinasRef = useRef(null);
             <br />
             <br />
             ➡Las Clases son de 1 hs. de duración: <br />
-            (De 4 a 9 años el horario es de <strong>18:30hs a 19:30hs</strong>)
+            (De 4 a 9 años el horario es de <strong>18:15hs a 19:30hs</strong>)
             <br />
-            (De 10 a 15 años el horario es de <strong>19:45hs a 20:45hs</strong>)
+            (De 10 a 15 años el horario es de <strong>19:45hs a 21:00hs</strong>)
             <br />
             <br />
             ➡Trabajamos con teoría musical, técnica y repertorio. Las clases son de modalidad grupal, con cupos reducidos.
