@@ -48,7 +48,7 @@ const Home = () => {
           onClick={() => navigate("/formInicial")}
           variant="outlined"
         >
-          PRE-INSCRIPCIONES 2026
+          INSCRIPCIONES 2026
         </Button>
         <ArrowBackIcon fontSize='large' />
       </div>
